@@ -1,7 +1,137 @@
 // previous order: jquery, csvparser, renderer, converter, controller
 
 
+//-----------------------------------------------------------------------------
+// Data GRid Renderer
+//-----------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------
+
+function renderData(dataGrid, headerNames, headerTypes, indent, newLine, propQuotes) {
+
+   //inits...
+    var commentLine = "//";
+    var commentLineEnd = "";
+    var numRows = dataGrid.length;
+    var numColumns = headerNames.length;
+
+
+    var outputText = "[";
+    
+    //begin render loops
+    for (var i=0; i < numRows; i++) {
+
+      var row = dataGrid[i];
+
+      outputText += "{";
+      for (var j=0; j < numColumns; j++)
+      {
+        if ((headerTypes[j] == "int")||(headerTypes[j] == "float"))
+        {
+          var rowOutput = row[j] || "null";
+        }
+        else {  var rowOutput = '"'+( row[j] || "" )+'"';  };
+
+        // ONLY difference i can tell
+        // json properties format = json
+        // the header names are in quotes for json, not for actionscript
+
+        // if json.selected
+        if(propQuotes)
+        {
+          outputText += ('"'+headerNames[j] +'"' + ":" + rowOutput );
+        }
+        else
+        {
+          outputText += (headerNames[j] + ":" + rowOutput)
+        }
+        // outputText += ('"'+headerNames[j] +'"' + ":" + rowOutput );
+        // if as.selected
+        // outputText += (headerNames[j] + ":" + rowOutput)
+
+        //outputText += (headerNames[j] + ":" + rowOutput)
+
+
+        if (j < (numColumns-1)) {outputText+=","};
+      };
+      outputText += "}";
+
+      if (i < (numRows-1)) {outputText += ","+newLine};
+
+    };
+
+    outputText += "];";
+    
+    
+    return outputText;
+
+}
+
+
+var DataGridRenderer = {
+
+  // am or json - depending if you want properties in quotes or not
+  
+  //---------------------------------------
+  // JSON properties - quotes around property names
+  //---------------------------------------
+
+  //---------------------------------------
+  // Actionscript - no quotes around property names
+  //---------------------------------------
+  
+  as: function (dataGrid, headerNames, headerTypes, indent, newLine) {
+
+    //inits...
+    var commentLine = "//";
+    var commentLineEnd = "";
+    var numRows = dataGrid.length;
+    var numColumns = headerNames.length;
+
+
+    var outputText = "[";
+    
+    //begin render loops
+    for (var i=0; i < numRows; i++) {
+
+      var row = dataGrid[i];
+
+      outputText += "{";
+      for (var j=0; j < numColumns; j++)
+      {
+        if ((headerTypes[j] == "int")||(headerTypes[j] == "float"))
+        {
+          var rowOutput = row[j] || "null";
+        }
+        else {  var rowOutput = '"'+( row[j] || "" )+'"';  };
+
+        // ONLY difference i can tell
+        // json properties format = json
+        // the header names are in quotes for json, not for actionscript
+
+        // if json.selected
+        // outputText += ('"'+headerNames[j] +'"' + ":" + rowOutput );
+        // if as.selected
+        // outputText += (headerNames[j] + ":" + rowOutput)
+
+        outputText += (headerNames[j] + ":" + rowOutput)
+
+
+        if (j < (numColumns-1)) {outputText+=","};
+      };
+      outputText += "}";
+
+      if (i < (numRows-1)) {outputText += ","+newLine};
+
+    };
+
+    outputText += "];";
+    
+    
+    return outputText;
+  },
+  
+}
 
 //-----------------------------------------------------------------------------
 // Controller
@@ -66,13 +196,17 @@ function DataConverter(nodeId) {
   this.includeWhiteSpace      = true;
   this.useTabsForIndent       = false;
 
+
+  this.propertyQuotes = false;
+  this.propertyQuotes = true;
+
 }
 
 //---------------------------------------
 // PUBLIC METHODS
 //---------------------------------------
 
-DataConverter.prototype.create = function(w,h) {
+DataConverter.prototype.create = function() { //function(w,h) {
   var self = this;
 
   $("#dataInput").keyup(function() {self.convert()});
@@ -115,8 +249,10 @@ DataConverter.prototype.convert = function() {
     var headerTypes = parseOutput.headerTypes;
     var errors = parseOutput.errors;
 
-    this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
+    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
 
+
+    this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
 
     //this.outputTextArea.val(errors + this.outputText);    //jquery
     this.outputTextArea = document.getElementById('dataOutput');
@@ -137,100 +273,35 @@ DataConverter.prototype.insertSampleData = function() {
 
 
 
-//-----------------------------------------------------------------------------
-// Data GRid Renderer
-//-----------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------
-
-var DataGridRenderer = {
-
-  // am or json - depending if you want properties in quotes or not
-  
-  //---------------------------------------
-  // JSON properties - quotes around property names
-  //---------------------------------------
-
-  //---------------------------------------
-  // Actionscript - no quotes around property names
-  //---------------------------------------
-  
-  as: function (dataGrid, headerNames, headerTypes, indent, newLine) {
-    //inits...
-    var commentLine = "//";
-    var commentLineEnd = "";
-    var numRows = dataGrid.length;
-    var numColumns = headerNames.length;
-
-
-    var outputText = "[";
-    
-    //begin render loops
-    for (var i=0; i < numRows; i++) {
-
-      var row = dataGrid[i];
-
-      outputText += "{";
-      for (var j=0; j < numColumns; j++)
-      {
-        if ((headerTypes[j] == "int")||(headerTypes[j] == "float"))
-        {
-          var rowOutput = row[j] || "null";
-        }
-        else {  var rowOutput = '"'+( row[j] || "" )+'"';  };
-
-        // ONLY difference i can tell
-        // json properties format = json
-        // the header names are in quotes for json, not for actionscript
-
-        // if json.selected
-        // outputText += ('"'+headerNames[j] +'"' + ":" + rowOutput );
-        // if as.selected
-        // outputText += (headerNames[j] + ":" + rowOutput)
-
-        outputText += (headerNames[j] + ":" + rowOutput)
-
-
-        if (j < (numColumns-1)) {outputText+=","};
-      };
-      outputText += "}";
-
-      if (i < (numRows-1)) {outputText += ","+newLine};
-
-    };
-
-    outputText += "];";
-    
-    
-    return outputText;
-  },
-  
-}
 //-----------------------------------------------------------------------------
 // Controller
 //-----------------------------------------------------------------------------
+
+
 
 //-----------------------------------------------------------------------------
 
 var _gaq = _gaq || [];
 
 $(document).ready(function(){
-  var widthOffset = 345;
-  var heightOffset = 35
-
-  var d = new DataConverter('converter');
 
   var sidebar = $('#header');
+
+  var widthOffset = 345;
+  var heightOffset = 35
 
   var win = $(window);
   var w = win.width() - widthOffset;
   var h = win.height() - heightOffset;
 
-  d.create(w,h);
+  var d = new DataConverter('converter');
+  d.create(); //(w,h);
   //d.convert(); // want this to go instantly... grr.......TODO
 
   $(".settingsElement").change(updateSettings);
 
+  /*
   $(window).bind('resize',function() {  
 
       w = win.width() - widthOffset;
@@ -239,6 +310,7 @@ $(document).ready(function(){
       sidebar.height(h);
 
     });
+*/
 
 
   function updateSettings (evt) {
@@ -247,20 +319,23 @@ $(document).ready(function(){
       _gaq.push(['_trackEvent', 'Settings',evt.currentTarget.id ]);
     };
 
+    //
+    // WHITESPACE
+    //
     d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
     
-    if (d.includeWhiteSpace) {
+    if (d.includeWhiteSpace)
+    {
       $("input[name=indentType]").removeAttr("disabled");
       var indentType = $('input[name=indentType]:checked').val();
-      if (indentType === "tabs") {
-        d.indent = "\t";
-      } else if (indentType === "spaces") {
-        d.indent = "  "
-      }
-    } else {
-      $("input[name=indentType]").attr("disabled", "disabled");
-    }
+      if (indentType === "tabs") {  d.indent = "\t";  } 
+      else if (indentType === "spaces") {  d.indent = "  "  }
+    } 
+    else {  $("input[name=indentType]").attr("disabled", "disabled");  }
 
+    //
+    // HEADERS
+    //
     d.headersProvided = $('#headersProvidedCB').attr('checked');
 
     if (d.headersProvided) {
@@ -268,44 +343,36 @@ $(document).ready(function(){
 
       var hm = $('input[name=headerModifications]:checked').val();
       if (hm === "downcase") {
-        d.downcaseHeaders = true;
-        d.upcaseHeaders = false;
-      } else if (hm === "upcase") {
-        d.downcaseHeaders = false;
-        d.upcaseHeaders = true;
-      } else if (hm === "none") {
-        d.downcaseHeaders = false;
-        d.upcaseHeaders = false;
+        d.downcaseHeaders = true; d.upcaseHeaders = false;
       }
-    } else {
-      $("input[name=headerModifications]").attr("disabled", "disabled");
+      else if (hm === "upcase") {
+        d.downcaseHeaders = false; d.upcaseHeaders = true;
+      }
+      else if (hm === "none") {
+        d.downcaseHeaders = false; d.upcaseHeaders = false;
+      }
     }
+    else {  $("input[name=headerModifications]").attr("disabled", "disabled");  }
     
+
     d.delimiter = $('input[name=delimiter]:checked').val();
     d.decimal = $('input[name=decimal]:checked').val();
     
     d.useUnderscores = true;
     
     d.convert();
+  
   };
 
   updateSettings();
 
 
-  
-})
 
-function insertSampleData() {
-
-  var sampleData = "booth\tnameId\tname\tisActive\n1\t3m\t3m\t0\n2\talc-luc\t\"Alcatel-Lucent\tblue\"\t1\nJohn\t45\torange\t1\n3\thzf\tHanz zimmerman foundation\t";
-  //"NAME\tVALUE\tCOLOR\tDATE\nAlan\t12\tblue\tSep. 25, 2009\nShan\t13\t\"green\tblue\"\tSep. 27, 2009\nJohn\t45\torange\tSep. 29, 2009\nMinna\t27\tteal\tSep. 30, 2009";
-
-  document.getElementById('dataInput').value = sampleData;
 
 
   
-  // this needs to convert automatically, but its not righ tnow...
-  document.getElementById('converter').convert();
-}
+}) // DOCUMENT READY
+
+
 
 
