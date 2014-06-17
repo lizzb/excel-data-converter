@@ -40,6 +40,13 @@ function DataConverter(nodeId) {
   this.includeWhiteSpace      = true;
   this.useTabsForIndent       = false;
 
+        /*
+      <select name="Data Types" id="dataSelector">
+        <option value="as">Properties not in quotes (Actionscript)</option>
+        <option value="json" selected="selected">Properties in quotes (JSON - Properties)</option>
+      </select>
+      */
+
 }
 
 
@@ -113,18 +120,12 @@ function DataConverter(nodeId) {
 DataConverter.prototype.create = function(w,h) {
   var self = this;
 
+  /*
   var str1 = '<div class="groupHeader" id="inputHeader"><p class="groupHeadline">Input CSV or tab-delimited data. <span class="subhead"> Using Excel? Simply copy and paste. No data on hand? <a href="#" id="insertSample">Use sample</a></span></p></div>';
   var str2 = '<textarea class="textInputs" id="dataInput"></textarea>';
   var str3 = '<div class="groupHeader" id="inputHeader"><p class="groupHeadline">Output as <select name="Data Types" id="dataSelector" >';
   var str4 = '</select><span class="subhead" id="outputNotes"></span></p></div>';
   var str5 = '<textarea class="textInputs" id="dataOutput"></textarea>';
-
-        /*
-      <select name="Data Types" id="dataSelector">
-        <option value="as">Properties not in quotes (Actionscript)</option>
-        <option value="json" selected="selected">Properties in quotes (JSON - Properties)</option>
-      </select>
-      */
 
   //
   //build HTML for converter
@@ -134,14 +135,19 @@ DataConverter.prototype.create = function(w,h) {
   var outputHeaderText = str3;
 
   var outputHeaderSelect = "";
+
     for (var i=0; i < this.outputDataTypes.length; i++) {
-      outputHeaderSelect += '<option value="'+this.outputDataTypes[i]["id"]+'" '
+
+      outputHeaderSelect += '<option '
+              + 'value="'+ this.outputDataTypes[i]["id"]+'" '
               + (this.outputDataTypes[i]["id"] == this.outputDataType ? 'selected="selected"' : '')
-              + '>' + this.outputDataTypes[i]["text"]+'</option>';
+              + '>'
+              + this.outputDataTypes[i]["text"]
+              + '</option>';
               
     };
     outputHeaderSelect += str4; //'</select><span class="subhead" id="outputNotes"></span></p></div>';
-    
+
   this.outputHeader = $(outputHeaderText + outputHeaderSelect);
   
   this.outputTextArea = $(str5);
@@ -150,21 +156,25 @@ DataConverter.prototype.create = function(w,h) {
   this.node.append(this.inputTextArea);
   this.node.append(this.outputHeader);
   this.node.append(this.outputTextArea);
+  */
+  //this.dataSelect = this.outputHeader.find("#dataSelector");
 
-  this.dataSelect = this.outputHeader.find("#dataSelector");
-
+  //this.dataSelect = document.getElementById('dataSelector');
 
   //add event listeners
 
-  this.outputTextArea.click(function(evt){this.select();});
+  //this.outputTextArea.click(function(evt){this.select();});
+  //$dataOutput.click(function(evt){this.select();});
 
 
-  $("#insertSample").bind('click',function(evt){
+ /*
+    $("#insertSample").bind('click',function(evt){
     evt.preventDefault();
     self.insertSampleData();
     self.convert();
     _gaq.push(['_trackEvent', 'SampleData','InsertGeneric']);
   });
+*/
 
   $("#dataInput").keyup(function() {self.convert()});
   $("#dataInput").change(function() {
@@ -180,38 +190,37 @@ DataConverter.prototype.create = function(w,h) {
   this.resize(w,h);
 }
 
+
 //
-//
+// unclear to me why this is a function and not just handled by css....?
 //
 DataConverter.prototype.resize = function(w,h) {
 
   var paneWidth = w;
   var paneHeight = (h-90)/2-20;
 
-  this.node.css({width:paneWidth});
-  this.inputTextArea.css({width:paneWidth-20,height:paneHeight});
-  this.outputTextArea.css({width: paneWidth-20, height:paneHeight});
+  //this.node.css({width:paneWidth});
+  //this.inputTextArea.css({width:paneWidth-20,height:paneHeight});
+  //this.outputTextArea.css({width: paneWidth-20, height:paneHeight});
 
 }
 
 //
-//
+//  ******* Actual data conversion happens *******
 //
 DataConverter.prototype.convert = function() {
 
-  this.inputText = this.inputTextArea.val();
+  //this.inputText = this.inputTextArea.val();                  //jquery
+  this.inputText = document.getElementById('dataInput').value;  //javascript only
   this.outputText = "";
 
 
   // make sure there is input data before converting...
   if (this.inputText.length > 0) {
 
-    if (this.includeWhiteSpace) {
-      this.newLine = "\n"; // console.log("yes")
-    }
-    else {
-      this.indent = ""; this.newLine = ""; // console.log("no")
-    }
+    if (this.includeWhiteSpace) {  this.newLine = "\n";  } // console.log("yes")
+    else {  this.indent = ""; this.newLine = "";  } // console.log("no")
+
 
     CSVParser.resetLog();
     var parseOutput = CSVParser.parse(this.inputText, this.headersProvided, this.delimiter, this.downcaseHeaders, this.upcaseHeaders);
@@ -224,14 +233,17 @@ DataConverter.prototype.convert = function() {
     this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
 
 
-    this.outputTextArea.val(errors + this.outputText);
+    //this.outputTextArea.val(errors + this.outputText);    //jquery
+    this.outputTextArea = document.getElementById('dataOutput');
+    this.outputTextArea.value = errors + this.outputText;
 
   }; //end test for existence of input text
 }
 
-
+/*
 DataConverter.prototype.insertSampleData = function() {
   this.inputTextArea.val("NAME\tVALUE\tCOLOR\tDATE\nAlan\t12\tblue\tSep. 25, 2009\nShan\t13\t\"green\tblue\"\tSep. 27, 2009\nJohn\t45\torange\tSep. 29, 2009\nMinna\t27\tteal\tSep. 30, 2009");
 }
+*/
 
 
