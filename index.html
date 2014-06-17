@@ -45,7 +45,7 @@ function insertSampleData(){
 
 <body>
   <div id='base'>
-    <div id='header'>
+    <!--div id='header'>
       <div id="description">
         <h1>Excel Data Converter</h1>
         <p>Converts Excel data into one of several web-friendly formats, including HTML, JSON and XML.</p>
@@ -146,7 +146,8 @@ booth nameid  name  isactive
 -->
 
 <!-- ... start converter ... -->
-     
+<div id="converter-container">     
+
 <div id="converter">
 <div class="groupHeader" id="inputHeader">
     <p class="groupHeadline">Input CSV or tab-delimited data.
@@ -156,7 +157,7 @@ booth nameid  name  isactive
     </p>
 </div>
 
-<textarea id="dataInput" class="textInputs" value="booth\tnameId\tname\tisActive\n1\t12\tblue\t0\n2\t13\t\"green\tblue\"\t1\nJohn\t45\torange\t1\n3\thzf\tHanz zimmerman foundation\t">
+<textarea id="dataInput" class="textInputs">
 </textarea>
 
 <div class="groupHeader" id="inputHeader">
@@ -185,7 +186,7 @@ booth nameid  name  isactive
 
 <textarea id="dataOutput" class="textInputs"></textarea>
 </div> <!-- /converter -->
-
+</div>
 <!--
 div .groupHeader
 p .groupHeadline

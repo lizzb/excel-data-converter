@@ -37,6 +37,8 @@ body {
 	color: #FFF;
 	width: 300px;
 	overflow: auto;
+  display: inline;
+  width: 30%;
 }
 #header a {
 	color: #99FFFF;
@@ -97,49 +99,59 @@ p {
 
 /*converter*/
 
+#converter-container{ width: 95%; padding: 10px;}
+
 #converter {
-	position: absolute;
+	/*position: absolute;
 	top: 15px;
 	left: 330px;
 	border-color:#000000 #666666 #666666 #000000;
   border-style:solid;
   border-width:2px;
+  */
 }
 
-
+/*
 p.dataHeaders{
 	height: 30px;
 	padding: 15px 15px 10px;
 }
 
-.textInputs {
-  
-  background-color: #C9B7C7;
-  border: none;
-  color: #664D63;
-  font-family: monospace;
-  font-size: 12px;
-  height: 300px;
-  line-height: 18px;
-  padding: 10px;
-  text-shadow: #DED4DD 0px 1px 0px;
-  -webkit-box-shadow: #333 1px 1px 10px inset;
-  -moz-box-shadow: #333 1px 1px 10px inset;
-}
+not in html but in css
+no dataHeaders
+#outputgroup
 
+not in css
+no .groupHeadline
+no #inputHeader... good cuz used twice for input and output
+*/
 
+.inputHeader{} 
+.outputHeader{} 
+
+/*
+#inputHeader{}
+#outputHeader{}
+*/
+
+/* data text header input or output */
 .groupHeader{
   width: 100%;
   color: #FFF;
   height: 45px;
-  background-color:#5F255C;
-  background-image: url('../images/header_gradient.png');
+  padding:10px;
+  /*background-image: url('../images/header_gradient.png');*/
+
+  /*background-color:#5F255C;*/
+
+  background-color:#ccc;
 }
 
 
-p.groupHeadline {
-  padding: 10px;
-}
+/*p.groupHeadline { padding: 10px; }
+.groupHeader p {
+}*/
+
 .groupHeader span.subhead {
   opacity: 0.7;
   font-size: 12px;
@@ -150,25 +162,45 @@ p.groupHeadline {
 }
 
 
-#outputGroup {
 
-}
-
-#dataInput {
-	
-}
-
-#dataOutput {
-
-	
-}
 #dataSelector {
-	width: 200px;
-	line-height: 22px;
-	font-size: 16px;
-	padding: 2px 0px;
+  width: 200px;
+  line-height: 22px;
+  font-size: 16px;
+  padding: 2px 0px;
 }
 
-#dataSelector option {
+#dataSelector option { }
 
+
+
+/*#outputGroup {}*/
+
+/* the data textareas */
+.textInputs {
+  
+  background-color: #C9B7C7;
+  border: none;
+
+  color: #664D63;
+  font-family: monospace;
+  font-size: 12px;
+
+  height: 300px;
+  line-height: 18px;
+  padding: 10px;
+
+  /*text-shadow: #DED4DD 0px 1px 0px;*/
+  /*
+  -webkit-box-shadow: #333 1px 1px 10px inset;
+  -moz-box-shadow: #333 1px 1px 10px inset;
+  */
 }
+
+
+.textInputs { width: 100%;}
+#dataInput { color: red;}
+#dataOutput { color: blue;}
+
+
+

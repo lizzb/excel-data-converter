@@ -322,7 +322,7 @@ $(document).ready(function(){
     //
     // WHITESPACE
     //
-    d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
+    /*d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
     
     if (d.includeWhiteSpace)
     {
@@ -332,11 +332,11 @@ $(document).ready(function(){
       else if (indentType === "spaces") {  d.indent = "  "  }
     } 
     else {  $("input[name=indentType]").attr("disabled", "disabled");  }
-
+    */
     //
     // HEADERS
     //
-    d.headersProvided = $('#headersProvidedCB').attr('checked');
+    /*d.headersProvided = $('#headersProvidedCB').attr('checked');
 
     if (d.headersProvided) {
       $("input[name=headerModifications]").removeAttr("disabled");
@@ -353,12 +353,14 @@ $(document).ready(function(){
       }
     }
     else {  $("input[name=headerModifications]").attr("disabled", "disabled");  }
-    
+    */
 
-    d.delimiter = $('input[name=delimiter]:checked').val();
-    d.decimal = $('input[name=decimal]:checked').val();
+    //d.delimiter = $('input[name=delimiter]:checked').val();
+    //d.decimal = $('input[name=decimal]:checked').val();
     
-    d.useUnderscores = true;
+    //d.useUnderscores = true;
+
+    //d.propertyQuotes = true;
     
     d.convert();
   
