@@ -126,6 +126,8 @@ DataConverter.prototype.insertSampleData = function() {
 function insertSampleData() {
 
   document.getElementById('dataInput').value = "NAME\tVALUE\tCOLOR\tDATE\nAlan\t12\tblue\tSep. 25, 2009\nShan\t13\t\"green\tblue\"\tSep. 27, 2009\nJohn\t45\torange\tSep. 29, 2009\nMinna\t27\tteal\tSep. 30, 2009";
+  
+  // this needs to convert automatically, but its not righ tnow...
   document.getElementById('converter').convert();
 }
 
