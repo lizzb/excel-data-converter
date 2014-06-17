@@ -26,7 +26,6 @@ var CSVParser = {
   //---------------------------------------
   // PARSE
   //---------------------------------------
-  //var parseOutput = CSVParser.parse(this.inputText, this.headersProvided, this.delimiter, this.downcaseHeaders, this.upcaseHeaders);
 
   parse: function (input, headersIncluded, delimiterType, downcaseHeaders, upcaseHeaders, decimalSign) {
 
@@ -63,14 +62,7 @@ var CSVParser = {
     RE = new RegExp(rowDelimiter + "+$", "gi");
     input = input.replace(RE, "");
 
-    // var arr = input.split(rowDelimiter);
-    //
-    // for (var i=0; i < arr.length; i++) {
-    //   dataArray.push(arr[i].split(columnDelimiter));
-    // };
 
-
-    // dataArray = jQuery.csv(columnDelimiter)(input);
     dataArray = this.CSVToArray(input, columnDelimiter);
 
     //escape out any tabs or returns or new lines
@@ -280,6 +272,5 @@ var CSVParser = {
       return( arrData );
     }
 
-
-
 }
+

@@ -1,3 +1,48 @@
+function DataConverter(nodeId) {
+
+  //---------------------------------------
+  // PUBLIC PROPERTIES
+  //---------------------------------------
+
+  this.nodeId                 = nodeId;
+  this.node                   = $("#"+nodeId);
+
+  this.outputDataTypes        = [
+                                {"text":"Properties not in quotes (Actionscript)",           "id":"as",               "notes":""},
+                                {"text":"Properties in quotes (JSON - Properties)",      "id":"json",             "notes":""},
+                                ];
+  this.outputDataType         = "json";
+
+  this.columnDelimiter        = "\t";
+  this.rowDelimiter           = "\n";
+
+  this.inputTextArea          = {};
+  this.outputTextArea         = {};
+
+  this.inputHeader            = {};
+  this.outputHeader           = {};
+  this.dataSelect             = {};
+
+  this.inputText              = "";
+  this.outputText             = "";
+
+  this.newLine                = "\n";
+  this.indent                 = "  ";
+
+  this.commentLine            = "//";
+  this.commentLineEnd         = "";
+  this.tableName              = "MrDataConverter"
+
+  this.useUnderscores         = true; // ????
+  this.headersProvided        = true;
+  this.downcaseHeaders        = true;
+  //this.upcaseHeaders          = false;
+  this.includeWhiteSpace      = true;
+  this.useTabsForIndent       = false;
+
+}
+
+
 //
 //  converter.js
 //  Mr-Data-Converter
@@ -7,7 +52,7 @@
 
 
 
-function DataConverter(nodeId) {
+/*function DataConverter(nodeId) {
 
   //---------------------------------------
   // PUBLIC PROPERTIES
@@ -59,7 +104,7 @@ function DataConverter(nodeId) {
   this.includeWhiteSpace      = true;
   this.useTabsForIndent       = false;
 
-}
+}*/
 
 //---------------------------------------
 // PUBLIC METHODS
@@ -68,20 +113,38 @@ function DataConverter(nodeId) {
 DataConverter.prototype.create = function(w,h) {
   var self = this;
 
-  //build HTML for converter
-  this.inputHeader = $('<div class="groupHeader" id="inputHeader"><p class="groupHeadline">Input CSV or tab-delimited data. <span class="subhead"> Using Excel? Simply copy and paste. No data on hand? <a href="#" id="insertSample">Use sample</a></span></p></div>');
-  this.inputTextArea = $('<textarea class="textInputs" id="dataInput"></textarea>');
-  var outputHeaderText = '<div class="groupHeader" id="inputHeader"><p class="groupHeadline">Output as <select name="Data Types" id="dataSelector" >';
-    for (var i=0; i < this.outputDataTypes.length; i++) {
+  var str1 = '<div class="groupHeader" id="inputHeader"><p class="groupHeadline">Input CSV or tab-delimited data. <span class="subhead"> Using Excel? Simply copy and paste. No data on hand? <a href="#" id="insertSample">Use sample</a></span></p></div>';
+  var str2 = '<textarea class="textInputs" id="dataInput"></textarea>';
+  var str3 = '<div class="groupHeader" id="inputHeader"><p class="groupHeadline">Output as <select name="Data Types" id="dataSelector" >';
+  var str4 = '</select><span class="subhead" id="outputNotes"></span></p></div>';
+  var str5 = '<textarea class="textInputs" id="dataOutput"></textarea>';
 
-      outputHeaderText += '<option value="'+this.outputDataTypes[i]["id"]+'" '
+        /*
+      <select name="Data Types" id="dataSelector">
+        <option value="as">Properties not in quotes (Actionscript)</option>
+        <option value="json" selected="selected">Properties in quotes (JSON - Properties)</option>
+      </select>
+      */
+
+  //
+  //build HTML for converter
+  //
+  this.inputHeader = $(str1);
+  this.inputTextArea = $(str2);
+  var outputHeaderText = str3;
+
+  var outputHeaderSelect = "";
+    for (var i=0; i < this.outputDataTypes.length; i++) {
+      outputHeaderSelect += '<option value="'+this.outputDataTypes[i]["id"]+'" '
               + (this.outputDataTypes[i]["id"] == this.outputDataType ? 'selected="selected"' : '')
-              + '>'
-              + this.outputDataTypes[i]["text"]+'</option>';
+              + '>' + this.outputDataTypes[i]["text"]+'</option>';
+              
     };
-    outputHeaderText += '</select><span class="subhead" id="outputNotes"></span></p></div>';
-  this.outputHeader = $(outputHeaderText);
-  this.outputTextArea = $('<textarea class="textInputs" id="dataOutput"></textarea>');
+    outputHeaderSelect += str4; //'</select><span class="subhead" id="outputNotes"></span></p></div>';
+    
+  this.outputHeader = $(outputHeaderText + outputHeaderSelect);
+  
+  this.outputTextArea = $(str5);
 
   this.node.append(this.inputHeader);
   this.node.append(this.inputTextArea);
@@ -92,11 +155,6 @@ DataConverter.prototype.create = function(w,h) {
 
 
   //add event listeners
-
-  // $("#convertButton").bind('click',function(evt){
-  //   evt.preventDefault();
-  //   self.convert();
-  // });
 
   this.outputTextArea.click(function(evt){this.select();});
 
@@ -122,6 +180,9 @@ DataConverter.prototype.create = function(w,h) {
   this.resize(w,h);
 }
 
+//
+//
+//
 DataConverter.prototype.resize = function(w,h) {
 
   var paneWidth = w;
@@ -133,22 +194,23 @@ DataConverter.prototype.resize = function(w,h) {
 
 }
 
+//
+//
+//
 DataConverter.prototype.convert = function() {
 
   this.inputText = this.inputTextArea.val();
   this.outputText = "";
 
 
-  //make sure there is input data before converting...
+  // make sure there is input data before converting...
   if (this.inputText.length > 0) {
 
     if (this.includeWhiteSpace) {
-      this.newLine = "\n";
-      // console.log("yes")
-    } else {
-      this.indent = "";
-      this.newLine = "";
-      // console.log("no")
+      this.newLine = "\n"; // console.log("yes")
+    }
+    else {
+      this.indent = ""; this.newLine = ""; // console.log("no")
     }
 
     CSVParser.resetLog();
