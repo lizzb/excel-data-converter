@@ -2,7 +2,7 @@
 
 
 //-----------------------------------------------------------------------------
-// Data GRid Renderer
+// Data Grid Renderer
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -197,6 +197,7 @@ function DataConverter(nodeId) {
   this.useTabsForIndent       = false;
 
 
+  // .............................
   this.propertyQuotes = false;
   this.propertyQuotes = true;
 
@@ -212,11 +213,11 @@ DataConverter.prototype.create = function() { //function(w,h) {
   $("#dataInput").keyup(function() {self.convert()});
   $("#dataInput").change(function() {
     self.convert();
-    _gaq.push(['_trackEvent', 'DataType',self.outputDataType]);
+   // _gaq.push(['_trackEvent', 'DataType',self.outputDataType]);
   });
 
   $("#dataSelector").bind('change',function(evt){
-       self.outputDataType = $(this).val();
+       //self.outputDataType = $(this).val();
        self.convert();
      });
 
@@ -282,7 +283,7 @@ DataConverter.prototype.insertSampleData = function() {
 
 //-----------------------------------------------------------------------------
 
-var _gaq = _gaq || [];
+//var _gaq = _gaq || [];
 
 $(document).ready(function(){
 
@@ -316,7 +317,7 @@ $(document).ready(function(){
   function updateSettings (evt) {
     
     if (evt) {
-      _gaq.push(['_trackEvent', 'Settings',evt.currentTarget.id ]);
+    //  _gaq.push(['_trackEvent', 'Settings',evt.currentTarget.id ]);
     };
 
     //

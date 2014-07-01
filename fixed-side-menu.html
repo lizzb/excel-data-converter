@@ -18,6 +18,21 @@
   .companyGrid {font-size: 10px;}
 
 /*
+
+.inputHeader
+.outputHeader
+.dataInput .textInputs .highlight
+.dataOutput .textInputs .highlight
+#dataOutput-booths
+#dataOutput-majors
+#dataOutput-positions
+#dataInput-booths
+#dataInput-majors
+#dataInput-positions
+
+
+
+
 #converter-container{ width: 95%; padding: 10px;} used to enclose both when input positioned over output
 #converter {} x
 
@@ -82,6 +97,8 @@
   font-family: monospace;
   font-size: 12px;
 }
+.dataInput {color: hotpink;}
+.dataOutput {color: dodgerblue;}
 /*#dataInput { color: red;}
 #dataOutput { color: blue;}*/
 
@@ -245,55 +262,154 @@
 
 
 
-
+<!-- ================================================== -->
 
 <section>
-
  <div class="row">
 
 
-      <!-- INPUT -->
-      <div id="converter" class="col-md-6">
+  <!-- INPUT -->
+  <div id="converter" class="converter col-md-6">
 
-        <div class="groupHeader inputHeader" id="input-majors">
-          <p>Input CSV or tab-delimited data.
-            <span class="subhead">Simply copy and paste data from Excel
-              <!--No data on hand? <a href="#" id="insertSample" onclick="insertSampleData()">Use sample</a>-->
-            </span>
-          </p>
-        </div>
-      <textarea id="dataInput-majors" class="textInputs highlight"></textarea>
-      </div> <!-- /converter col-md-6 -->
+    <div class="groupHeader inputHeader"><!-- id="input-majors"-->
+      <p>Input CSV or tab-delimited data.
+            <!--<span class="subhead">Simply copy and paste data from Excel
+              No data on hand? <a href="#" id="insertSample" onclick="insertSampleData()">Use sample</a>
+            </span>-->
+      </p>
+    </div>
+    <textarea id="dataInput" class="textInputs highlight"></textarea>
+  </div> <!-- /converter col-md-6 -->
 
 
-      <!-- OUTPUT -->
-      <div class="col-md-6">
-      <div class="groupHeader outputHeader" id="">
-        <p>Output as
-          <select name="Data Types" id="dataSelector">
-            <option value="as">Actionscript</option>
-            <option value="json" selected="selected">JSON - Properties</option>
-          </select><br><br>
-          <span class="subhead" id="outputNotes"></span>
-        </p>
-     </div>
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="groupHeader outputHeader" id="">
+      <p>Output as
+      <!--select name="Data Types" id="dataSelector">
+        <option value="as">Actionscript</option>
+        <option value="json" selected="selected">JSON - Properties</option>
+      </select><br><br>
+      <span class="subhead" id="outputNotes"></span-->
+      </p>
+    </div>
+    <textarea id="dataOutput" class="textInputs highlight"></textarea>
 
-      <textarea id="dataOutput" class="textInputs highlight"></textarea>
-       </div>
-       <!--  </div> <!-- /converter -->
+  </div> <!--/col-md-6 -->
 
-  
+
   </div> <!--/row -->
-
 </section>
 
+<!-- ================================================== -->
+
+
+
+<!-- ================================================== -->
+<section>
+ <div class="row converter">
+
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Majors</p>
+    </div>
+    <textarea id="dataInput-majors" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Majors</p>
+    </div>
+    <textarea id="dataOutput-majors" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->
 
 
 
 
 
+<!-- ================================================== -->
+<section>
+ <div class="row converter">
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Majors</p>
+    </div>
+    <textarea id="dataInput-majors" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
 
 
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Majors</p>
+    </div>
+    <textarea id="dataOutput-majors" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->
+
+<!-- ================================================== -->
+<section>
+ <div class="row converter">
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Positions</p>
+    </div>
+    <textarea id="dataInput-positions" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Positions</p>
+    </div>
+    <textarea id="dataOutput-positions" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->
+
+<!-- ================================================== -->
+<section>
+ <div class="row converter">
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Booths</p>
+    </div>
+    <textarea id="dataInput-booths" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Booths</p>
+    </div>
+    <textarea id="dataOutput-booths" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->
 
 
 
