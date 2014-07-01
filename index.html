@@ -193,69 +193,11 @@ Indent with:  tabs  spaces
 
 function convertDataMajors() {
 
-
-  var columnDelimiter        = "\t";
-  var rowDelimiter           = "\n";
-
-  var inputTextArea          = {};
-  var outputTextArea         = {};
-
-  var inputHeader            = {};
-  var outputHeader           = {};
-  var dataSelect             = {};
-
-  //var inputText              = "";
-  //var outputText             = "";
-
-  var newLine                = "\n";
-  var indent                 = "  ";
-
-  var commentLine            = "//";
-  var commentLineEnd         = "";
- 
-  var headersProvided        = true;
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false; // why would this be used..?
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false;
-
-
-
-  var propertyQuotes = false; // as
-  //this.propertyQuotes = true; json
-
-  // .............................
-
-  //var includeWhiteSpace = true;
-  //var headersProvided = true;
-  var delimiter = "auto";
-  //var downcaseHeaders = true;
-  //var upcaseHeaders = true;
-  //var propertyQuotes = true;
-
- /* this.includeWhiteSpace
-  this.headersProvided
-  this.delimiter
-  this.downcaseHeaders
-  this.upcaseHeaders
-this.propertyQuotes
-  */
-
-    //this.inputText = this.inputTextArea.val();                  //jquery
-    var inputText = document.getElementById('dataInput-majors').value;  //vanilla js
+    
     var outputText = "";
-
-    //var newLine = "";
-    //var indent = ""; // might have an issue here...
 
   // make sure there is input data before converting...
   if (inputText.length > 0) {
-
-    if (includeWhiteSpace == true) {  newLine = "\n";  }
-    else {  
-      indent = "";
-      newLine = "";  
-    }
 
 
     CSVParser.resetLog();
@@ -283,14 +225,7 @@ this.propertyQuotes
 } // end convert majors
 
 
-// http://stravid.com/en/cleaner-javascript-code-with-enums/
 
-var dataTypes = {
-  MAJORS: 0,
-  POSITIONS: 1,
-  BOOTHS: 2,
-  COMPANIES: 3
-};
 
 
 function convertData(dataType) {
@@ -332,37 +267,8 @@ function convertData(dataType) {
   }
 
 
+  
 
-
-  var columnDelimiter        = "\t";
-  var rowDelimiter           = "\n";
-
-  var inputTextArea          = {};
-  var outputTextArea         = {};
-
-  var inputHeader            = {};
-  var outputHeader           = {};
-  var dataSelect             = {};
-
-  var newLine                = "\n";
-  var indent                 = "  ";
-
-  var commentLine            = "//";
-  var commentLineEnd         = "";
- 
-  var headersProvided        = true;
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false; // why would this be used..?
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false;
-
-
-
-  var propertyQuotes = false;
-  var delimiter = "auto";
-
-    //this.inputText = this.inputTextArea.val();                  //jquery
-    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
     var outputText = "";
 
   // make sure there is input data before converting...
@@ -382,11 +288,6 @@ function convertData(dataType) {
     var headerNames = parseOutput.headerNames;
     var headerTypes = parseOutput.headerTypes;
     var errors = parseOutput.errors;
-
-    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
-
-
-    //this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
 
     //var 
     outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine,propertyQuotes);

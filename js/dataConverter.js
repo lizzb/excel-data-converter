@@ -1,11 +1,77 @@
+// http://stravid.com/en/cleaner-javascript-code-with-enums/
+
+var dataTypes = {
+  MAJORS: 0,
+  POSITIONS: 1,
+  BOOTHS: 2,
+  COMPANIES: 3
+};
+
+
+
+//
+// Textarea element id's containing data to be converted
+//
+var inputMajors = document.getElementById('dataInput-majors'); //.value;
+var inputPositions = document.getElementById('dataInput-positions'); //.value;
+var inputBooths = document.getElementById('dataInput-booths'); //.value;
+
+//
+// Textarea element id's to insert converted data
+//
+var outputMajors = document.getElementById('dataOutput-majors'); //.value;
+var outputPositions = document.getElementById('dataOutput-positions'); //.value;
+var outputBooths = document.getElementById('dataOutput-booths'); //.value;
+
+
+
 //-----------------------------------------------------------------------------
 //
 // Data Conversion Settings
 //
 //-----------------------------------------------------------------------------
 
+  var propertyQuotes         = false; // as; = true is json
+  var delimiter              = "auto";
 
+  var columnDelimiter        = "\t";
+  var rowDelimiter           = "\n";
 
+  //var inputHeader            = {};
+  //var outputHeader           = {};
+  //var dataSelect             = {};
+
+  //var inputTextArea          = {};
+  //var outputTextArea         = {};
+
+  //var inputText              = "";
+  //var outputText             = "";
+
+  //var commentLine            = "//";
+  //var commentLineEnd         = "";
+ 
+  var headersProvided        = true;
+  
+  var downcaseHeaders        = true; 
+  var upcaseHeaders          = false;
+
+  var includeWhiteSpace      = true;
+  var useTabsForIndent       = false;
+
+  var newLine                = "\n";
+  var indent                 = "  ";
+
+  // if (includeWhiteSpace == true) {  newLine = "\n";  }
+  //  else {    indent = "";  newLine = "";   }
+
+  
+
+  
+
+//jquery
+//this.inputText = this.inputTextArea.val();                  
+//var inputText = document.getElementById('dataInput-majors').value;
+//vanilla js
 
 
 
@@ -40,39 +106,48 @@
 //-----------------------------------------------------------------------------
 
 
-function convertDataPositions() {
+//this.inputText = this.inputTextArea.val();                  //jquery
+//    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
+//    var outputText = "";
 
+
+
+function convertDataPositions() {
 
   var columnDelimiter        = "\t";
   var rowDelimiter           = "\n";
 
-  var inputTextArea          = {};
-  var outputTextArea         = {};
+  //var inputTextArea          = {};
+  //var outputTextArea         = {};
 
-  var inputHeader            = {};
-  var outputHeader           = {};
-  var dataSelect             = {};
+  //var inputHeader            = {};
+  //var outputHeader           = {};
+  //var dataSelect             = {};
+
+  //var commentLine            = "//";
+  //var commentLineEnd         = "";
+ 
+  var headersProvided        = true;
+
+  var downcaseHeaders        = true;  // ......
+  var upcaseHeaders          = false; // ......
+
+  var includeWhiteSpace      = true;  // -----
+  var useTabsForIndent       = false; // -----
 
   var newLine                = "\n";
   var indent                 = "  ";
 
-  var commentLine            = "//";
-  var commentLineEnd         = "";
- 
-  var headersProvided        = true;
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false; // why would this be used..?
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false;
+  var propertyQuotes         = false;
+  var delimiter              = "auto";
 
 
+  // textarea input element id
+  var inputTextArea          = document.getElementById('dataInput-positions');
+  var outputTextArea         = document.getElementById('dataOutput-positions');
 
-  var propertyQuotes = false;
-  var delimiter = "auto";
-
-    //this.inputText = this.inputTextArea.val();                  //jquery
-    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
-    var outputText = "";
+    var inputText = inputTextArea.value;
+    //var outputText = "";
 
   // make sure there is input data before converting...
   if (inputText.length > 0) {
@@ -92,15 +167,10 @@ function convertDataPositions() {
     var headerTypes = parseOutput.headerTypes;
     var errors = parseOutput.errors;
 
-    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
+    var outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine, propertyQuotes);
 
-
-    //this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
-
-    //var 
-    outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine,propertyQuotes);
-
-    document.getElementById('dataOutput-positions').value = errors + outputText;
+    //document.getElementById('dataOutput-positions').value = errors + outputText;
+    outputTextArea.value = errors + outputText;
 
 
   }; //end test for existence of input text
