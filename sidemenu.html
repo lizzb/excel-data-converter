@@ -10,826 +10,11 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 
-
-  <style>
-    
-  .data-header {color: red;}
-  .data-header2 {color: blue;}
-  .data-header3 {color: green;}
-  .companyGrid {font-size: 10px;}
-  
-  .propName {color: #008080; }
-/*
-
-#companies-converter
-#booths-converter
-#majors-converter
-#positions-converter
-
-.inputHeader
-.outputHeader
-.dataInput .textInputs .highlight
-.dataOutput .textInputs .highlight
-    
-#dataOutput-booths
-#dataOutput-majors
-#dataOutput-positions
-#dataInput-booths
-#dataInput-majors
-    #dataInput-positions*/
-    /*#dataInput { color: red;}
-#dataOutput { color: blue;}*/
-
-
-.textInputs { 
-  width: 100%;
-  height: 300px;
-
-  background-color: #C9B7C7; /* PURPLISH */
-
-  color: #664D63;
-  font-family: monospace;
-  font-size: 12px;
-}
-.dataInput {color: hotpink;}
-.dataOutput {color: dodgerblue;}
-    
-    
-    
-    
-    textarea {
-  
-  margin-bottom: 0;
-  font-size: 12px !important;
-  
-  color: #008080;
-  
-  border: 0;
-  border-left: 4px solid #D7DBE4;
-  background: #F0F3F8;
-  
-  display: block;
-padding: 10px;
-margin: 0 0 10.5px;
-line-height: 1.42857;
-word-break: break-all;
-word-wrap: break-word;
-/*color: #333333;
-  color: rgb(51, 51, 51);*/
-
-border-radius: 2px;
-
-
-font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
-white-space: pre-wrap;
-  
-}
-/*display: inline;*/
-
-
-  </style>
-
-
-
-
-
-   <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  link rel="stylesheet" href="css/converter.css" type="text/css" media="screen" title="no title" charset="utf-8"-->
+   <!--link rel="stylesheet" href="css/converter.css" type="text/css" media="screen" title="no title" charset="utf-8"-->
 
   <script src="js/jquery.js" charset="utf-8"></script>
   <script src="js/CSVParser.js" charset="utf-8"></script>
   <!--script src="js/convertdata.js"></script-->
-
-    <script>
-   /* if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
-    document.documentElement.className += 'js';
-}*/
-
-  // previous order: jquery, csvparser, renderer, converter, controller
-
-
-
-
-//-----------------------------------------------------------------------------
-// Data Grid Renderer
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-
-function renderData(dataGrid, headerNames, headerTypes, indent, newLine, propQuotes) {
-
-   //inits...
-    var commentLine = "//";
-    var commentLineEnd = "";
-    var numRows = dataGrid.length;
-    var numColumns = headerNames.length;
-
-
-    var outputText = "[";
-    
-    //begin render loops
-    for (var i=0; i < numRows; i++) {
-
-      var row = dataGrid[i];
-
-      outputText += "{";
-      for (var j=0; j < numColumns; j++)
-      {
-        if ((headerTypes[j] == "int")||(headerTypes[j] == "float"))
-        {
-          var rowOutput = row[j] || "null";
-        }
-        else {  var rowOutput = '"'+( row[j] || "" )+'"';  };
-
-        // ONLY difference i can tell
-        // json properties format = json
-        // the header names are in quotes for json, not for actionscript
-
-  //---------------------------------------
-  // JSON properties - quotes around property names
-  //---------------------------------------
-
-  //---------------------------------------
-  // Actionscript - no quotes around property names
-  //---------------------------------------
-
-        // if json.selected
-        if(propQuotes)
-        {
-          outputText += ('"'+headerNames[j] +'"' + ":" + rowOutput );
-        }
-        else // if as.selected
-        {
-          outputText += (headerNames[j] + ":" + rowOutput)
-        }
-
-        if (j < (numColumns-1)) {outputText+=","};
-      };
-
-      outputText += "}";
-      if (i < (numRows-1)) {outputText += ","+newLine};
-    };
-
-    outputText += "];";
-    
-    return outputText;
-}
-
-
-
-  // am or json - depending if you want properties in quotes or not
-
-
-
-function DataConverter(nodeId) {
-  
-  
-/*
-SETTINGS
-
-Delimiter:   Auto   Comma   Tab
-Decimal Sign:   Dot   Comma
- First row is the header
-Transform:  downcase   upcase   none
- Include white space in output
-Indent with:  tabs  spaces
-*/
-  
-  
-
-  //---------------------------------------
-  // PUBLIC PROPERTIES
-  //---------------------------------------
-
-  this.nodeId                 = nodeId;
-  this.node                   = $("#"+nodeId);
-
-
-
-
-  var inputTextArea          = {};
-  var outputTextArea         = {};
-  
-  var inputText              = "";
-  var outputText             = "";
-
-  /*
-  this.inputHeader            = {};
-  this.outputHeader           = {};
-  this.dataSelect             = {};
-  */
-
-
-  // .............................
-  this.propertyQuotes = false;
-  this.propertyQuotes = true;
-  
-  
-
-  
-  
-  // ----- SETTINGS -----
-
-  // Delimiter:   Auto   Comma   Tab
-  var columnDelimiter        = "\t";
-  var rowDelimiter           = "\n";
-  
-  
-  
-  // Decimal Sign:   Dot   Comma
-  
-  
-  
-  // First row is the header (true/false)
-  var headersProvided        = true;
-  
-  // Transform:  downcase   upcase   none
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false; 
-  
-  // Include white space in output (true/false)
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false;
-  
-  // Indent with:  tabs  spaces
-  var newLine                = "\n";
-  var indent                 = "  ";
-  
-  
-    /*if (includeWhiteSpace == true) 
-        {  newLine = "\n";  }
-    else {  
-      indent = "";
-      newLine = "";  }*/
-
-  
-
-}
-
-//---------------------------------------
-// PUBLIC METHODS
-//---------------------------------------
-
-DataConverter.prototype.create = function() { //function(w,h) {
-  var self = this;
-
-  $("#dataInput").keyup(function() {self.convert()});
-  $("#dataInput").change(function() {
-    self.convert();
-   // _gaq.push(['_trackEvent', 'DataType',self.outputDataType]);
-  });
-
-  $("#dataSelector").bind('change',function(evt){
-       //self.outputDataType = $(this).val();
-       self.convert();
-     });
-
-  // this.resize(w,h);
-
-
-
-
-
-  /*var dataInputs = document.querySelectorAll('.dataInput');
-
-  [].forEach.call(dataInputs, function (rawdata) {
-
-    rawdata.addEventListener('click', function(e) {
-    // Do stuff
-}, false);
-
-    rawdata.addEventListener('keyup', function(e) { self.convert(); }, false);
-    rawdata.addEventListener('change', function(e) { self.convert(); }, false);
-*/
-
-// hacky, temporary
-// http://gomakethings.com/ditching-jquery-for-vanilla-js/
-// want to get AWAY form jquery, use vanilla js
-
-  $("#dataInput-majors").keyup(function() { self.convert()});
-  $("#dataInput-majors").change(function() { self.convert(); });
-
-  $("#dataInput-majors").keyup(function() { convertDataMajors()});
-  $("#dataInput-majors").change(function() { convertDataMajors(); });
-
-
-  $("#dataInput-positions").keyup(function() { convertDataPositions()});
-  $("#dataInput-positions").change(function() { convertDataPositions(); });
-
-  $("#dataInput-booths").keyup(function() { convertDataBooths()});
-  $("#dataInput-booths").change(function() { convertDataBooths(); });
-
-
- //});
-  
-
-/*
-// Sandwich Functions
-if ( 'querySelector' in document && 'addEventListener' in window ) {
-
-    var sandwiches = document.querySelectorAll('.sandwich');
-
-    [].forEach.call(sandwiches, function (sandwich) {
-
-        sandwich.addEventListener('click', function(e) {
-
-            if ( hasClass(sandwich, 'mustard') ) {
-                removeClass(sandwich, 'mustard');
-            }
-
-            else {
-                addClass(sandwich, 'mustard');
-            }
-        
-        }
-        
-    });
-*/
-
-
-}
-
-
-function convertDataMajors() {
-
-
-  var columnDelimiter        = "\t";
-  var rowDelimiter           = "\n";
-
-  var inputTextArea          = {};
-  var outputTextArea         = {};
-
-  var inputHeader            = {};
-  var outputHeader           = {};
-  var dataSelect             = {};
-
-  //var inputText              = "";
-  //var outputText             = "";
-
-  var newLine                = "\n";
-  var indent                 = "  ";
-
-  var commentLine            = "//";
-  var commentLineEnd         = "";
- 
-  var headersProvided        = true;
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false; // why would this be used..?
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false;
-
-
-
-  var propertyQuotes = false; // as
-  //this.propertyQuotes = true; json
-
-  // .............................
-
-  //var includeWhiteSpace = true;
-  //var headersProvided = true;
-  var delimiter = "auto";
-  //var downcaseHeaders = true;
-  //var upcaseHeaders = true;
-  //var propertyQuotes = true;
-
- /* this.includeWhiteSpace
-  this.headersProvided
-  this.delimiter
-  this.downcaseHeaders
-  this.upcaseHeaders
-this.propertyQuotes
-  */
-
-    //this.inputText = this.inputTextArea.val();                  //jquery
-    var inputText = document.getElementById('dataInput-majors').value;  //vanilla js
-    var outputText = "";
-
-    //var newLine = "";
-    //var indent = ""; // might have an issue here...
-
-  // make sure there is input data before converting...
-  if (inputText.length > 0) {
-
-    if (includeWhiteSpace == true) {  newLine = "\n";  }
-    else {  
-      indent = "";
-      newLine = "";  
-    }
-
-
-    CSVParser.resetLog();
-    var parseOutput = CSVParser.parse(inputText, headersProvided, delimiter, downcaseHeaders, upcaseHeaders);
-
-    var dataGrid = parseOutput.dataGrid;
-    var headerNames = parseOutput.headerNames;
-    var headerTypes = parseOutput.headerTypes;
-    var errors = parseOutput.errors;
-
-    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
-
-
-    //this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
-
-    //var 
-    outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine,propertyQuotes);
-
-    //this.outputTextArea.val(errors + this.outputText);    //jquery
-    //this.outputTextArea = document.getElementById('dataOutput');
-    //this.outputTextArea.value = errors + this.outputText;
-
-    //var outputTextArea = document.getElementById('dataOutput');
-    //var outputTextArea.value = errors + this.outputText;
-
-    document.getElementById('dataOutput-majors').value = errors + outputText;
-
-
-  }; //end test for existence of input text
-} // end convert majors
-
-
-// http://stravid.com/en/cleaner-javascript-code-with-enums/
-
-var dataTypes = {
-	MAJORS: 0,
-	POSITIONS: 1,
-	BOOTHS: 2,
-	COMPANIES: 3
-};
-
-
-function convertData(dataType) {
-
-	switch(dataType)
-	{
-		case MAJORS:
-			convertDataMajors();
-			break;
-		case POSITIONS:
-			convertDataPositions();
-			break;
-		case BOOTHS:
-			convertDataBooths();
-			break;
-		case COMPANIES:
-			convertDataCompanies();
-			break;
-		default:
-			break;
-	}
-
-	switch(dataType)
-	{
-		case "MAJORS":
-			convertDataMajors();
-			break;
-		case "POSITIONS":
-			convertDataPositions();
-			break;
-		case "BOOTHS":
-			convertDataBooths();
-			break;
-		case "COMPANIES":
-			convertDataCompanies();
-			break;
-		default:
-			break;
-	}
-
-
-
-
-  var columnDelimiter        = "\t";
-  var rowDelimiter           = "\n";
-
-  var inputTextArea          = {};
-  var outputTextArea         = {};
-
-  var inputHeader            = {};
-  var outputHeader           = {};
-  var dataSelect             = {};
-
-  var newLine                = "\n";
-  var indent                 = "  ";
-
-  var commentLine            = "//";
-  var commentLineEnd         = "";
- 
-  var headersProvided        = true;
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false; // why would this be used..?
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false;
-
-
-
-  var propertyQuotes = false;
-  var delimiter = "auto";
-
-    //this.inputText = this.inputTextArea.val();                  //jquery
-    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
-    var outputText = "";
-
-  // make sure there is input data before converting...
-  if (inputText.length > 0) {
-
-    if (includeWhiteSpace == true) {  newLine = "\n";  }
-    else {  
-      indent = "";
-      newLine = "";  
-    }
-
-
-    CSVParser.resetLog();
-    var parseOutput = CSVParser.parse(inputText, headersProvided, delimiter, downcaseHeaders, upcaseHeaders);
-
-    var dataGrid = parseOutput.dataGrid;
-    var headerNames = parseOutput.headerNames;
-    var headerTypes = parseOutput.headerTypes;
-    var errors = parseOutput.errors;
-
-    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
-
-
-    //this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
-
-    //var 
-    outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine,propertyQuotes);
-
-    document.getElementById('dataOutput-positions').value = errors + outputText;
-
-
-  }; //end test for existence of input text
-} // end convert positions
-
-
-
-
-
-
-
-function convertDataPositions() {
-
-
-  var columnDelimiter        = "\t";
-  var rowDelimiter           = "\n";
-
-  var inputTextArea          = {};
-  var outputTextArea         = {};
-
-  var inputHeader            = {};
-  var outputHeader           = {};
-  var dataSelect             = {};
-
-  var newLine                = "\n";
-  var indent                 = "  ";
-
-  var commentLine            = "//";
-  var commentLineEnd         = "";
- 
-  var headersProvided        = true;
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false; // why would this be used..?
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false;
-
-
-
-  var propertyQuotes = false;
-  var delimiter = "auto";
-
-    //this.inputText = this.inputTextArea.val();                  //jquery
-    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
-    var outputText = "";
-
-  // make sure there is input data before converting...
-  if (inputText.length > 0) {
-
-    if (includeWhiteSpace == true) {  newLine = "\n";  }
-    else {  
-      indent = "";
-      newLine = "";  
-    }
-
-
-    CSVParser.resetLog();
-    var parseOutput = CSVParser.parse(inputText, headersProvided, delimiter, downcaseHeaders, upcaseHeaders);
-
-    var dataGrid = parseOutput.dataGrid;
-    var headerNames = parseOutput.headerNames;
-    var headerTypes = parseOutput.headerTypes;
-    var errors = parseOutput.errors;
-
-    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
-
-
-    //this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
-
-    //var 
-    outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine,propertyQuotes);
-
-    document.getElementById('dataOutput-positions').value = errors + outputText;
-
-
-  }; //end test for existence of input text
-} // end convert positions
-
-
-
-
-
-//
-//  ******* Actual data conversion happens *******
-//
-DataConverter.prototype.convert = function() {
-
-    //this.inputText = this.inputTextArea.val();                  //jquery
- //// 
- this.inputText = document.getElementById('dataInput').value;  //javascript only
-
-
-  // http://gomakethings.com/ditching-jquery-for-vanilla-js/
-/*
-  var sandwichTurkey = querySelector('#turkey');
-
-sandwichTurkey.addEventListener('click', function(e) {
-    // Do stuff
-}, false);
-*/
-
-/*var dataInputs = querySelectorAll('.dataInput');
-
-dataInputs.addEventListener('click', function(e) {
-    // Do stuff
-}, false);
-*/
-
-
-
-
-
-  this.outputText = "";
-
-  // make sure there is input data before converting...
-  if (this.inputText.length > 0) {
-
-    if (this.includeWhiteSpace) {  this.newLine = "\n";  } // console.log("yes")
-    else {  this.indent = ""; this.newLine = "";  } // console.log("no")
-
-
-    CSVParser.resetLog();
-    var parseOutput = CSVParser.parse(this.inputText, this.headersProvided, this.delimiter, this.downcaseHeaders, this.upcaseHeaders);
-
-    var dataGrid = parseOutput.dataGrid;
-    var headerNames = parseOutput.headerNames;
-    var headerTypes = parseOutput.headerTypes;
-    var errors = parseOutput.errors;
-
-    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
-
-
-    this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
-
-    //this.outputTextArea.val(errors + this.outputText);    //jquery
-    this.outputTextArea = document.getElementById('dataOutput');
-    this.outputTextArea.value = errors + this.outputText;
-
-  }; //end test for existence of input text
-}
-
-/*
-DataConverter.prototype.insertSampleData = function() {
-  // $("#insertSample").bind('click',function(evt){
-  //evt.preventDefault();
-  //this.inputTextArea.val("NAME\tVALUE\tCOLOR\tDATE\nAlan\t12\tblue\tSep. 25, 2009\nShan\t13\t\"green\tblue\"\tSep. 27, 2009\nJohn\t45\torange\tSep. 29, 2009\nMinna\t27\tteal\tSep. 30, 2009");
-  
-  document.getElementById('dataInput').value = "NAME\tVALUE\tCOLOR\tDATE\nAlan\t12\tblue\tSep. 25, 2009\nShan\t13\t\"green\tblue\"\tSep. 27, 2009\nJohn\t45\torange\tSep. 29, 2009\nMinna\t27\tteal\tSep. 30, 2009";
-  self.convert();
-}*/
-
-
-
-
-//-----------------------------------------------------------------------------
-// Controller
-//-----------------------------------------------------------------------------
-
-
-
-//-----------------------------------------------------------------------------
-
-//var _gaq = _gaq || [];
-
-$(document).ready(function(){
-
-  var sidebar = $('#header');
-
-  var widthOffset = 345;
-  var heightOffset = 35
-
-  var win = $(window);
-  var w = win.width() - widthOffset;
-  var h = win.height() - heightOffset;
-
-  var d = new DataConverter('converter');
-  d.create(); //(w,h);
-  //d.convert(); // want this to go instantly... grr.......TODO
-
-  $(".settingsElement").change(updateSettings);
-
-  /*
-  $(window).bind('resize',function() {  
-
-      w = win.width() - widthOffset;
-      h = win.height() - heightOffset;
-      d.resize(w,h);
-      sidebar.height(h);
-
-    });
-*/
-
-
-  function updateSettings (evt) {
-    
-    if (evt) {
-    //  _gaq.push(['_trackEvent', 'Settings',evt.currentTarget.id ]);
-    };
-
-    //
-    // WHITESPACE
-    //
-    /*d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
-    
-    if (d.includeWhiteSpace)
-    {
-      $("input[name=indentType]").removeAttr("disabled");
-      var indentType = $('input[name=indentType]:checked').val();
-      if (indentType === "tabs") {  d.indent = "\t";  } 
-      else if (indentType === "spaces") {  d.indent = "  "  }
-    } 
-    else {  $("input[name=indentType]").attr("disabled", "disabled");  }
-    */
-    //
-    // HEADERS
-    //
-    /*d.headersProvided = $('#headersProvidedCB').attr('checked');
-
-    if (d.headersProvided) {
-      $("input[name=headerModifications]").removeAttr("disabled");
-
-      var hm = $('input[name=headerModifications]:checked').val();
-      if (hm === "downcase") {
-        d.downcaseHeaders = true; d.upcaseHeaders = false;
-      }
-      else if (hm === "upcase") {
-        d.downcaseHeaders = false; d.upcaseHeaders = true;
-      }
-      else if (hm === "none") {
-        d.downcaseHeaders = false; d.upcaseHeaders = false;
-      }
-    }
-    else {  $("input[name=headerModifications]").attr("disabled", "disabled");  }
-    */
-
-    //d.delimiter = $('input[name=delimiter]:checked').val();
-    //d.decimal = $('input[name=decimal]:checked').val();
-    
-    //d.useUnderscores = true;
-
-    //d.propertyQuotes = true;
-    
-    d.convert();
-  
-  };
-
-  updateSettings();
-
-
-
-
-
-  
-}) // DOCUMENT READY
-
-
-
-
-
-</script>
-
-  <script>
-
-    function insertSampleData() {
-
-  var sampleData = "booth\tnameId\tname\tisActive\n1\t3m\t3m\t0\n2\talc-luc\t\"Alcatel-Lucent\tblue\"\t1\nJohn\t45\torange\t1\n3\thzf\tHanz zimmerman foundation\t";
-  //"NAME\tVALUE\tCOLOR\tDATE\nAlan\t12\tblue\tSep. 25, 2009\nShan\t13\t\"green\tblue\"\tSep. 27, 2009\nJohn\t45\torange\tSep. 29, 2009\nMinna\t27\tteal\tSep. 30, 2009";
-
-  document.getElementById('dataInput').value = sampleData;
-  
-  // this needs to convert automatically, but its not righ tnow...
-  //document.getElementById('converter').convert();
-}
-
-</script>
 
 </head>
 
@@ -838,9 +23,7 @@ $(document).ready(function(){
 
 
 
-<!--p>
-                            This is a description for Step 3. Three: 3, third, tertiary -- but not ternary. Actually I'm not sure. Just filler. Blah, blah blah blahblah, de-blah. Bob Loblaw. Chareth Cutestory. Winona Ryder. And THAT'S why you always leave a note!! Lucille is not a loose seal, nor is she #2.
-                          </p-->
+
 
 <body class="docs docs-page docs-overview">
 
@@ -862,7 +45,8 @@ $(document).ready(function(){
       </div>
     </div>
   </div>
-</div>
+
+<!--/div ...................... ........................................... -->
 
 
 
@@ -872,6 +56,9 @@ $(document).ready(function(){
   <div class="row">
 
 
+<!-- ===================================================================== -->  
+<!--    SIDE MENU                                                          -->
+<!-- _____________________________________________________________________ -->
     <div class="col-md-2 col-sm-3 aside-menu">
       <div class="docked-menu">
 
@@ -880,6 +67,11 @@ $(document).ready(function(){
 
           <!-- active initially places the bar on right side -->
           <li class="menu-title active"><a href="/docs/overview/">Overview</a></li>
+
+
+          <li><a href="/docs/overview/#step1-install">Install</a></li>
+          <li><a href="/docs/overview/#step2-start">Start</a></li>
+          <li><a href="/docs/overview/#step3-run">Run</a></li>
 
           <!--
         <ul class="nav left-menu">
@@ -893,13 +85,9 @@ $(document).ready(function(){
         <ul class="nav left-menu">
           <li class="menu-title"><a href="">JavaScript</a></li>
         </ul>
-        -->
+        --> 
           
-          <li><a href="/docs/overview/#step1-install">Install</a></li>
-          <li><a href="/docs/overview/#step2-start">Start</a></li>
-          <li><a href="/docs/overview/#step3-run">Run</a></li>
-          
-           <li><a href="/docs/overview/#majors-data">Majors Data</a></li>
+          <li><a href="/docs/overview/#majors-data">Majors Data</a></li>
           <li><a href="/docs/overview/#positions-data">Positions Data</a></li>
           <li><a href="/docs/overview/#booths-data">Booths Data</a></li>
           <li><a href="/docs/overview/#companyGrid">Company Grid</a></li>
@@ -908,11 +96,19 @@ $(document).ready(function(){
 
       </div> <!-- /docked-menu -->
     </div> <!-- /col-md-2 col-sm-3 aside-menu -->
+<!-- _____________________________________________________________________ -->
 
     
+
+
+
+<!-- ====================================================================== -->  
+<!--    MAIN CONTENT                                                        -->
+<!-- ______________________________________________________________________ -->    
     <div class="col-md-10 col-sm-9 main-content">
                         
 
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->    
 <section class="docs-section active" id="overview">
 
   <h1 class="title"><a href="#overview">Overview</a></h1>
@@ -926,22 +122,12 @@ $(document).ready(function(){
         Follow these quick steps and start building high quality mobile apps in minutes. For a more indepth overview, watch our <a href="" target="">Crash Course video</a>, which covers everything else you'd want to know.
       </p>
     </div>   
-
-  
+ 
 </section>
+<!-- ______________________________________________________________________ -->
 
 
 
-
-
-
-
-
-
-
-
-
-  
 <!-- What's Included
   ================================================== 
 <section class="docs-section" id="whats-included">
@@ -953,16 +139,13 @@ $(document).ready(function(){
 </section>
 -->
           
-      
+ 
+
 <!-- Getting Started
 ================================================== -->        
             
             
 <div id="getting-started">
-
-
-
-
 
 <!-- ================================================== -->
 
@@ -1028,7 +211,6 @@ $(document).ready(function(){
   <!-- .......... STEP 1 .......... -->
   
   <section class="docs-section" id="step1-install">
-    
     
     
   <div class="row" id="first-step">
@@ -1435,11 +617,13 @@ intern	Intern</pre>
   
   
   
-  
-  
-  
-  
 
+  
+    
+
+<!-- ===================================================================== -->  
+<!--    PRE-FOOTER                                                         -->
+<!-- _____________________________________________________________________ -->
 <div class="pre-footer">
   <div class="row ionic">
     <div class="col-sm-6 col-a">
@@ -1462,13 +646,18 @@ intern	Intern</pre>
     </div> <!-- /col-sm-6 col-b -->
   </div> <!-- /row ionic -->
 </div> <!-- /pre-footer -->
+<!-- ===================================================================== -->
 
 
           
-        <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. -->
 
 
 
+
+
+<!-- ===================================================================== -->  
+<!--    FOOTER                                                             -->
+<!-- _____________________________________________________________________ -->
 <footer class="footer">
 
   <p class="authors">
@@ -1490,12 +679,20 @@ intern	Intern</pre>
   </nav>
   
 </footer>
-
+<!-- ===================================================================== -->
 
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 
 <script src="http://ionicframework.com/js/site.js"></script>
+
+
+<!--p>
+  This is a description for Step 3. Three: 3, third, tertiary -- but not ternary. Actually I'm not sure. Just filler. Blah, blah blah blahblah, de-blah. Bob Loblaw. Chareth Cutestory. Winona Ryder. And THAT'S why you always leave a note!! Lucille is not a loose seal, nor is she #2.
+</p-->
+
+<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. -->
+
 
 </body>
 </html>
