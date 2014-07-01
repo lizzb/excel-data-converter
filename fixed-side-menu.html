@@ -18,8 +18,8 @@
   .companyGrid {font-size: 10px;}
 
 /*
-#converter-container{ width: 95%; padding: 10px;}
-#converter {}
+#converter-container{ width: 95%; padding: 10px;} used to enclose both when input positioned over output
+#converter {} x
 
 .inputHeader{} 
 .outputHeader{} 
@@ -36,7 +36,7 @@
 /*background-color:#5F255C;*/
 
 
-/*p.groupHeadline { padding: 10px; }
+/*
 .groupHeader p {}
 
 .groupHeader span.subhead {
@@ -82,8 +82,8 @@
   font-family: monospace;
   font-size: 12px;
 }
-#dataInput { color: red;}
-#dataOutput { color: blue;}
+/*#dataInput { color: red;}
+#dataOutput { color: blue;}*/
 
   </style>
 
@@ -91,8 +91,8 @@
 
 
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <!--link rel="stylesheet" href="css/converter.css" type="text/css" media="screen" title="no title" charset="utf-8"-->
+   <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  link rel="stylesheet" href="css/converter.css" type="text/css" media="screen" title="no title" charset="utf-8"-->
 
   <script src="js/jquery.js" charset="utf-8"></script>
   <script src="js/CSVParser.js" charset="utf-8"></script>
@@ -212,6 +212,16 @@
 </section>
 
 
+
+
+
+
+
+
+
+
+
+
   
 <!-- What's Included
   ================================================== 
@@ -230,6 +240,64 @@
             
             
 <div id="getting-started">
+
+
+
+
+
+
+
+<section>
+
+ <div class="row">
+
+
+      <!-- INPUT -->
+      <div id="converter" class="col-md-6">
+
+        <div class="groupHeader inputHeader" id="input-majors">
+          <p>Input CSV or tab-delimited data.
+            <span class="subhead">Simply copy and paste data from Excel
+              <!--No data on hand? <a href="#" id="insertSample" onclick="insertSampleData()">Use sample</a>-->
+            </span>
+          </p>
+        </div>
+      <textarea id="dataInput-majors" class="textInputs highlight"></textarea>
+      </div> <!-- /converter col-md-6 -->
+
+
+      <!-- OUTPUT -->
+      <div class="col-md-6">
+      <div class="groupHeader outputHeader" id="">
+        <p>Output as
+          <select name="Data Types" id="dataSelector">
+            <option value="as">Actionscript</option>
+            <option value="json" selected="selected">JSON - Properties</option>
+          </select><br><br>
+          <span class="subhead" id="outputNotes"></span>
+        </p>
+     </div>
+
+      <textarea id="dataOutput" class="textInputs highlight"></textarea>
+       </div>
+       <!--  </div> <!-- /converter -->
+
+  
+  </div> <!--/row -->
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
   
 
   
@@ -334,47 +402,7 @@
 
 
 
-<section>
- <div id="converter-container" class="row">
 
-    <!-- ... start converter ... -->
-
-      <!-- INPUT -->
-      <div id="converter" class="col-md-6">
-
-        <div class="groupHeader" id="inputHeader">
-          <p>Input CSV or tab-delimited data.
-            <span class="subhead">Simply copy and paste data from Excel
-              <!--No data on hand? <a href="#" id="insertSample" onclick="insertSampleData()">Use sample</a>-->
-            </span>
-          </p>
-        </div>
-
-      <textarea id="dataInput" class="textInputs highlight"></textarea>
-      </div>
-
-
-      <!-- OUTPUT -->
-      <div class="col-md-6">
-      <div class="groupHeader" id="outputHeader">
-        <p>Output as
-          <select name="Data Types" id="dataSelector">
-            <option value="as">Actionscript</option>
-            <option value="json" selected="selected">JSON - Properties</option>
-          </select><br><br>
-          <span class="subhead" id="outputNotes"></span>
-        </p>
-     </div>
-
-      <textarea id="dataOutput" class="textInputs highlight"></textarea>
-       </div>
-
-  <!--  </div> <!-- /converter -->
-  </div> <!--/converter-container -->
-
-
-
-</section>
     
                 
 
