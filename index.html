@@ -32,6 +32,14 @@
 
   <script>
 
+  //---------------------------------------
+  // PUBLIC PROPERTIES
+  //---------------------------------------
+
+  //this.nodeId                 = nodeId;
+  //this.node                   = $("#"+nodeId);
+  
+
 /*
 SETTINGS
 
@@ -60,14 +68,17 @@ Indent with:  tabs  spaces
   // First row is the header (true/false)
   var headersProvided        = true;
   
+
   // Transform:  downcase   upcase   none
   var downcaseHeaders        = true; 
   var upcaseHeaders          = false; // can't be true if downcase = true
   
+
   // Include white space in output (true/false)
   var includeWhiteSpace      = true;
   var useTabsForIndent       = false; // can't be true if whitespace = true
   
+
   // Indent with:  tabs  spaces
   var newLine                = "\n";
   var indent                 = "  ";
@@ -76,6 +87,8 @@ Indent with:  tabs  spaces
   /*if (includeWhiteSpace == true)  {  newLine = "\n";  }
   else {    indent = "";  newLine = "";  }*/
 
+
+  // .............................
   var propertyQuotes = true;
 
 
@@ -164,147 +177,19 @@ function renderData(dataGrid, headerNames, headerTypes, indent, newLine, propQuo
 
 
 
-   /* if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
-    document.documentElement.className += 'js';
-}*/
-
-  // previous order: jquery, csvparser, renderer, converter, controller
-
-
-
-
-
-
-
-
-
-
-function DataConverter(nodeId) {
-  
-  
-
-  
-  
-
-  //---------------------------------------
-  // PUBLIC PROPERTIES
-  //---------------------------------------
-
-  this.nodeId                 = nodeId;
-  this.node                   = $("#"+nodeId);
-
-
-
-
-  var inputTextArea          = {};
-  var outputTextArea         = {};
-  
-  var inputText              = "";
-  var outputText             = "";
-
-  /*
-  this.inputHeader            = {};
-  this.outputHeader           = {};
-  this.dataSelect             = {};
-  */
-
-
-  // .............................
-  this.propertyQuotes = false;
-  this.propertyQuotes = true;
-  
-  
-
-  
-  
-  
-
-  
-
-}
-
 //---------------------------------------
 // PUBLIC METHODS
 //---------------------------------------
 
-DataConverter.prototype.create = function() { //function(w,h) {
-  var self = this;
+//DataConverter.prototype.create = function() {
+//  var self = this;
 
-  $("#dataInput").keyup(function() {self.convert()});
-  $("#dataInput").change(function() {
-    self.convert();
-   // _gaq.push(['_trackEvent', 'DataType',self.outputDataType]);
-  });
+  //$("#dataInput").keyup(function()  { self.convert(); });
+  //$("#dataInput").change(function() { self.convert(); });
 
-  $("#dataSelector").bind('change',function(evt){
-       //self.outputDataType = $(this).val();
-       self.convert();
-     });
-
-  // this.resize(w,h);
+  //$("#dataSelector").bind('change',function(evt){ self.convert(); });
 
 
-
-
-
-  /*var dataInputs = document.querySelectorAll('.dataInput');
-
-  [].forEach.call(dataInputs, function (rawdata) {
-
-    rawdata.addEventListener('click', function(e) {
-    // Do stuff
-}, false);
-
-    rawdata.addEventListener('keyup', function(e) { self.convert(); }, false);
-    rawdata.addEventListener('change', function(e) { self.convert(); }, false);
-*/
-
-// hacky, temporary
-// http://gomakethings.com/ditching-jquery-for-vanilla-js/
-// want to get AWAY form jquery, use vanilla js
-
-  $("#dataInput-majors").keyup(function() { self.convert()});
-  $("#dataInput-majors").change(function() { self.convert(); });
-
-  $("#dataInput-majors").keyup(function() { convertDataMajors()});
-  $("#dataInput-majors").change(function() { convertDataMajors(); });
-
-
-  $("#dataInput-positions").keyup(function() { convertDataPositions()});
-  $("#dataInput-positions").change(function() { convertDataPositions(); });
-
-  $("#dataInput-booths").keyup(function() { convertDataBooths()});
-  $("#dataInput-booths").change(function() { convertDataBooths(); });
-
-
- //});
-  
-
-/*
-// Sandwich Functions
-if ( 'querySelector' in document && 'addEventListener' in window ) {
-
-    var sandwiches = document.querySelectorAll('.sandwich');
-
-    [].forEach.call(sandwiches, function (sandwich) {
-
-        sandwich.addEventListener('click', function(e) {
-
-            if ( hasClass(sandwich, 'mustard') ) {
-                removeClass(sandwich, 'mustard');
-            }
-
-            else {
-                addClass(sandwich, 'mustard');
-            }
-        
-        }
-        
-    });
-*/
-
-
-}
 
 
 function convertDataMajors() {
@@ -381,11 +266,6 @@ this.propertyQuotes
     var headerNames = parseOutput.headerNames;
     var headerTypes = parseOutput.headerTypes;
     var errors = parseOutput.errors;
-
-    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
-
-
-    //this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
 
     //var 
     outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine,propertyQuotes);
@@ -597,7 +477,7 @@ function convertDataPositions() {
 //
 //  ******* Actual data conversion happens *******
 //
-DataConverter.prototype.convert = function() {
+/* * DataConverter.prototype.convert = function() {
 
     //this.inputText = this.inputTextArea.val();                  //jquery
  //// 
@@ -622,7 +502,7 @@ dataInputs.addEventListener('click', function(e) {
 
 
 
-
+/* *
 
   this.outputText = "";
 
@@ -651,7 +531,7 @@ dataInputs.addEventListener('click', function(e) {
     this.outputTextArea.value = errors + this.outputText;
 
   }; //end test for existence of input text
-}
+} */
 
 /*
 DataConverter.prototype.insertSampleData = function() {
@@ -671,50 +551,54 @@ DataConverter.prototype.insertSampleData = function() {
 //-----------------------------------------------------------------------------
 
 
-
 //-----------------------------------------------------------------------------
-
-//var _gaq = _gaq || [];
-
+//
+//   ON PAGE LOAD
+//
+//-----------------------------------------------------------------------------
 $(document).ready(function(){
+
+  // hacky, temporary
+  // hacky, temporary
+  // hacky, temporary
+  //$("#dataInput-majors").keyup(function()   { self.convert(); });
+  //$("#dataInput-majors").change(function()  { self.convert(); });
+
+  $("#dataInput-majors").keyup(function()   { convertDataMajors(); });
+  $("#dataInput-majors").change(function()  { convertDataMajors(); });
+
+
+  $("#dataInput-positions").keyup(function()  { convertDataPositions(); });
+  $("#dataInput-positions").change(function() { convertDataPositions(); });
+
+  $("#dataInput-booths").keyup(function()   { convertDataBooths(); });
+  $("#dataInput-booths").change(function()  { convertDataBooths(); });
+
 
   //var sidebar = $('#header');
 
-  var widthOffset = 345;
-  var heightOffset = 35
+  //var widthOffset = 345;
+  //var heightOffset = 35
 
-  var win = $(window);
-  var w = win.width() - widthOffset;
-  var h = win.height() - heightOffset;
+  //var win = $(window);
+  //var w = win.width() - widthOffset;
+  //var h = win.height() - heightOffset;
 
-  var d = new DataConverter('converter');
-  d.create(); //(w,h);
+  //var d = new DataConverter('converter');
+  //d.create(); //(w,h);
   //d.convert(); // want this to go instantly... grr.......TODO
 
-  $(".settingsElement").change(updateSettings);
+  //$(".settingsElement").change(updateSettings);
+
+
 
   /*
-  $(window).bind('resize',function() {  
-
-      w = win.width() - widthOffset;
-      h = win.height() - heightOffset;
-      d.resize(w,h);
-      sidebar.height(h);
-
-    });
-*/
-
-
   function updateSettings (evt) {
-    
-    if (evt) {
-    //  _gaq.push(['_trackEvent', 'Settings',evt.currentTarget.id ]);
-    };
 
     //
     // WHITESPACE
     //
-    /*d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
+    d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
     
     if (d.includeWhiteSpace)
     {
@@ -724,11 +608,11 @@ $(document).ready(function(){
       else if (indentType === "spaces") {  d.indent = "  "  }
     } 
     else {  $("input[name=indentType]").attr("disabled", "disabled");  }
-    */
+    
     //
     // HEADERS
     //
-    /*d.headersProvided = $('#headersProvidedCB').attr('checked');
+    d.headersProvided = $('#headersProvidedCB').attr('checked');
 
     if (d.headersProvided) {
       $("input[name=headerModifications]").removeAttr("disabled");
@@ -745,7 +629,7 @@ $(document).ready(function(){
       }
     }
     else {  $("input[name=headerModifications]").attr("disabled", "disabled");  }
-    */
+    
 
     //d.delimiter = $('input[name=delimiter]:checked').val();
     //d.decimal = $('input[name=decimal]:checked').val();
@@ -758,10 +642,54 @@ $(document).ready(function(){
   
   };
 
-  updateSettings();
+  updateSettings();*/
+
+
+  
+
+  // hacky, temporary
+  // http://gomakethings.com/ditching-jquery-for-vanilla-js/
+  // want to get AWAY form jquery, use vanilla js
+  /*
+  var dataInputs = document.querySelectorAll('.dataInput');
+
+  [].forEach.call(dataInputs, function (rawdata) {
+    rawdata.addEventListener('click', function(e) {  // Do stuff
+  }, false);
+
+    rawdata.addEventListener('keyup', function(e) { self.convert(); }, false);
+    rawdata.addEventListener('change', function(e) { self.convert(); }, false);
+*/
 
 
 
+   /* if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
+    document.documentElement.className += 'js';
+}*/
+
+
+/*
+// Sandwich Functions
+if ( 'querySelector' in document && 'addEventListener' in window ) {
+
+    var sandwiches = document.querySelectorAll('.sandwich');
+
+    [].forEach.call(sandwiches, function (sandwich) {
+
+        sandwich.addEventListener('click', function(e) {
+
+            if ( hasClass(sandwich, 'mustard') ) {
+                removeClass(sandwich, 'mustard');
+            }
+
+            else {
+                addClass(sandwich, 'mustard');
+            }
+        }
+        
+    });
+*/
+//}
 
 
   
@@ -1032,105 +960,7 @@ white-space: pre-wrap;
   </div> <!--/row -->
 </section>
 
-<!-- ================================================== -->
 
-  
-  <!-- .......... STEP 1 .......... -->
-  
-  <section class="docs-section" id="step1-install">
-    
-    
-  <div class="row" id="first-step">
-    
-    <div class="col-md-6 step-desc">
-      
-      <div class="num">
-        <img src="http://ionicframework.com/img/docs/symbols/step-1@2x.png" width="52" height="52">
-      </div> <!-- /num-->
-      
-      <div class="desc">
-        <!--h2 class="title"><a href="#step1-install">Install Ionic</a></h2-->
-        <h3><a href="#step1-install">Install Ionic</a></h3>
-        <p>
-          First, install Node.js. Then, install the latest Cordova and Ionic command-line tools. Follow the Android and iOS platform guides to install required platform dependencies. Windows users might want to watch this installation video.
-        </p>
-        <p> <i>Note: iOS development requires Mac OS X.</i> </p>
-      </div> <!-- /desc-->
-      
-    </div> <!-- /col-md-6 step-desc -->
-                
-                
-    <div class="col-md-6 code">
-      <div class="highlight">
-        <pre><code class="bash"><span class="nv">$ </span>npm install -g cordova ionic</code></pre>
-      </div> <!-- /highlight -->
-    </div> <!-- /col-md-6 code -->
-  </div> <!-- /row first-step -->
-  
-  </section>
-    
-    
-    <!-- .......... STEP 2 .......... -->
-
-    <section class="docs-section" id="step2-start">   
-    
-
-  <div class="row">
-    <div class="col-md-6 step-desc">
-      <div class="num">
-        <img src="http://ionicframework.com/img/docs/symbols/step-2@2x.png" width="52" height="52">
-      </div>
-      <div class="desc">
-        <h3><a href="#step2-start">Start a project</a></h3>
-        <p>
-          Create an Ionic project using one of our ready-made app templates, or a blank one to start
-          fresh.
-        </p>
-      </div>
-    </div>
-    <div class="col-md-6 code">
-      <div class="highlight"><pre><code class="bash">  <span class="nv">$ </span>ionic start myApp tabs
-        
-      </code></pre></div>
-    </div>
-  </div>
-  <div class="row" id="template-images">
-    
-  </div>
-  
-    </section>
-  
-
-  <!-- .......... STEP 3 .......... -->
-  
-    <section class="docs-section" id="step3-run">
-  <div class="row">
-    
-    <div class="col-md-6 step-desc">
-      
-      <div class="num">
-        <img src="http://ionicframework.com/img/docs/symbols/step-3@2x.png" width="52" height="52">
-      </div>
-      <div class="desc">
-        <h3><a href="#step3-run">Run it</a></h3>
-        <p>
-          Ionic apps are based on Cordova, so we can use the Cordova utilities to build, test, and deploy our apps, but we
-          provide simple ways to do the same with the ionic utility (substitute ios for android to build for Android):
-        </p>
-      </div>
-    </div>
-    <div class="col-md-6 code">
-      <div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>myApp
-        <span class="nv">$ </span>ionic platform add ios
-        <span class="nv">$ </span>ionic build ios
-        <span class="nv">$ </span>ionic emulate ios
-      </code></pre></div>
-    </div>
-  </div>
-  
-<!--   </div>  /getting started-->
-
-</section>
          
 
 
@@ -1429,6 +1259,108 @@ intern  Intern</pre>
 
 
 
+
+
+
+<!-- ================================================== -->
+
+  
+  <!-- .......... STEP 1 .......... -->
+  
+  <section class="docs-section" id="step1-install">
+    
+    
+  <div class="row" id="first-step">
+    
+    <div class="col-md-6 step-desc">
+      
+      <div class="num">
+        <img src="http://ionicframework.com/img/docs/symbols/step-1@2x.png" width="52" height="52">
+      </div> <!-- /num-->
+      
+      <div class="desc">
+        <!--h2 class="title"><a href="#step1-install">Install Ionic</a></h2-->
+        <h3><a href="#step1-install">Install Ionic</a></h3>
+        <p>
+          First, install Node.js. Then, install the latest Cordova and Ionic command-line tools. Follow the Android and iOS platform guides to install required platform dependencies. Windows users might want to watch this installation video.
+        </p>
+        <p> <i>Note: iOS development requires Mac OS X.</i> </p>
+      </div> <!-- /desc-->
+      
+    </div> <!-- /col-md-6 step-desc -->
+                
+                
+    <div class="col-md-6 code">
+      <div class="highlight">
+        <pre><code class="bash"><span class="nv">$ </span>npm install -g cordova ionic</code></pre>
+      </div> <!-- /highlight -->
+    </div> <!-- /col-md-6 code -->
+  </div> <!-- /row first-step -->
+  
+  </section>
+    
+    
+    <!-- .......... STEP 2 .......... -->
+
+    <section class="docs-section" id="step2-start">   
+    
+
+  <div class="row">
+    <div class="col-md-6 step-desc">
+      <div class="num">
+        <img src="http://ionicframework.com/img/docs/symbols/step-2@2x.png" width="52" height="52">
+      </div>
+      <div class="desc">
+        <h3><a href="#step2-start">Start a project</a></h3>
+        <p>
+          Create an Ionic project using one of our ready-made app templates, or a blank one to start
+          fresh.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 code">
+      <div class="highlight"><pre><code class="bash">  <span class="nv">$ </span>ionic start myApp tabs
+        
+      </code></pre></div>
+    </div>
+  </div>
+  <div class="row" id="template-images">
+    
+  </div>
+  
+    </section>
+  
+
+  <!-- .......... STEP 3 .......... -->
+  
+    <section class="docs-section" id="step3-run">
+  <div class="row">
+    
+    <div class="col-md-6 step-desc">
+      
+      <div class="num">
+        <img src="http://ionicframework.com/img/docs/symbols/step-3@2x.png" width="52" height="52">
+      </div>
+      <div class="desc">
+        <h3><a href="#step3-run">Run it</a></h3>
+        <p>
+          Ionic apps are based on Cordova, so we can use the Cordova utilities to build, test, and deploy our apps, but we
+          provide simple ways to do the same with the ionic utility (substitute ios for android to build for Android):
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 code">
+      <div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>myApp
+        <span class="nv">$ </span>ionic platform add ios
+        <span class="nv">$ </span>ionic build ios
+        <span class="nv">$ </span>ionic emulate ios
+      </code></pre></div>
+    </div>
+  </div>
+  
+<!--   </div>  /getting started-->
+
+</section>
 
 
 
