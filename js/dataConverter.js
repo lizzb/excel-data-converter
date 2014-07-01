@@ -1,3 +1,82 @@
+
+
+
+
+
+
+
+//-----------------------------------------------------------------------------
+// Controller
+//-----------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------------
+//
+//   ON PAGE LOAD
+//
+//-----------------------------------------------------------------------------
+$(document).ready(function(){
+
+
+//-----------------------------------------------------------------------------
+//
+// Textarea element IDs
+//
+//-----------------------------------------------------------------------------
+
+//
+// Textarea element id's containing data to be converted
+//
+var inputMajors = document.getElementById('dataInput-majors'); //.value;
+var inputPositions = document.getElementById('dataInput-positions'); //.value;
+var inputBooths = document.getElementById('dataInput-booths'); //.value;
+
+//
+// Textarea element id's to insert converted data
+//
+var outputMajors = document.getElementById('dataOutput-majors'); //.value;
+var outputPositions = document.getElementById('dataOutput-positions'); //.value;
+var outputBooths = document.getElementById('dataOutput-booths'); //.value;
+//-----------------------------------------------------------------------------
+
+
+
+//-----------------------------------------------------------------------------
+//
+// Data Converter Wrapper functions
+// last param = prop quotes on or off
+//
+//-----------------------------------------------------------------------------
+function convertDataMajors() { convertData(inputMajors, outputMajors, false)};
+function convertDataPositions() { convertData(inputPositions, outputPositions, false)};
+function convertDataBooths() { convertData(inputBooths, outputBooths, true)};
+
+
+
+
+
+
+  $("#dataInput-majors").keyup(function()   { convertDataMajors(); });
+  $("#dataInput-majors").change(function()  { convertDataMajors(); });
+
+  $("#dataInput-positions").keyup(function()  { convertDataPositions(); });
+  $("#dataInput-positions").change(function() { convertDataPositions(); });
+
+  $("#dataInput-booths").keyup(function()   { convertDataBooths(); });
+  $("#dataInput-booths").change(function()  { convertDataBooths(); });
+
+  //d.convert(); // want this to go instantly... grr.......TODO
+
+
+  // hacky, temporary
+  // http://gomakethings.com/ditching-jquery-for-vanilla-js/
+  // want to get AWAY form jquery, use vanilla js
+
+  
+}) // DOCUMENT READY
+//-----------------------------------------------------------------------------
+
+
 // http://gomakethings.com/ditching-jquery-for-vanilla-js/
 
 // http://stravid.com/en/cleaner-javascript-code-with-enums/
@@ -10,18 +89,50 @@ var dataTypes = {
 };
 
 
-
 //-----------------------------------------------------------------------------
 //
 // Data Conversion Settings
 //
 //-----------------------------------------------------------------------------
 
-  var propertyQuotes         = false; // as; = true is json
-  var delimiter              = "auto";
-
+  // Delimiter:   Auto   Comma   Tab
+  //
   var columnDelimiter        = "\t";
   var rowDelimiter           = "\n";
+
+  var delimiter              = "auto";
+
+  
+  // Decimal Sign:   Dot   Comma
+  //
+  
+  
+  // First row is the header (true/false)
+  //
+  var headersProvided        = true;
+  
+
+  // Transform:  downcase   upcase   none
+  //
+  var downcaseHeaders        = true; 
+  var upcaseHeaders          = false; // can't be true if downcase = true
+  
+
+  // Include white space in output (true/false)
+  //
+  var includeWhiteSpace      = true;
+  var useTabsForIndent       = false; // can't be true if whitespace = true
+
+
+  // Indent with:  tabs  spaces
+  //
+  var newLine                = "\n";
+  var indent                 = "  ";
+
+  // if (includeWhiteSpace == true) {  newLine = "\n";  }
+  //  else {    indent = "";  newLine = "";   }
+
+
 
   //var inputHeader            = {};
   //var outputHeader           = {};
@@ -35,20 +146,12 @@ var dataTypes = {
 
   //var commentLine            = "//";
   //var commentLineEnd         = "";
- 
-  var headersProvided        = true;
-  
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false;
 
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false;
 
-  var newLine                = "\n";
-  var indent                 = "  ";
+  // .............................
+  //
+  var propertyQuotes         = false; // as; = true is json
 
-  // if (includeWhiteSpace == true) {  newLine = "\n";  }
-  //  else {    indent = "";  newLine = "";   }
 
   
 
@@ -62,7 +165,9 @@ var dataTypes = {
 
 
 
-//-----------------------------------------------------------------------------
+
+
+/*//-----------------------------------------------------------------------------
 //
 // Textarea element IDs
 //
@@ -89,10 +194,14 @@ var outputBooths = document.getElementById('dataOutput-booths'); //.value;
 //-----------------------------------------------------------------------------
 //
 // Data Converter Wrapper functions
+// last param = prop quotes on or off
 //
 //-----------------------------------------------------------------------------
-
-
+function convertDataMajors() { convertData(inputMajors, outputMajors, false);
+function convertDataPositions() { convertData(inputPositions, outputPositions, false);
+function convertDataBooths() { convertData(inputBooths, outputBooths, true);
+*/
+/*
 function convertDataMajors() {
 
   //"dataInput-"
@@ -127,7 +236,7 @@ function convertDataBooths() {
   convertData(inputTextArea, outputTextArea);
 
 } // end convert booths
-
+*/
 
 //-----------------------------------------------------------------------------
 //
@@ -143,7 +252,7 @@ function convertDataBooths() {
 // function convertData(inputTextArea, outputTextArea) 
 //function convertData()
 
-function convertData(inputTextArea, outputTextArea) {
+function convertData(inputTextArea, outputTextArea, propertyQuotes) {
 
   var columnDelimiter        = "\t";
   var rowDelimiter           = "\n";
@@ -172,7 +281,7 @@ function convertData(inputTextArea, outputTextArea) {
   var newLine                = "\n";
   var indent                 = "  ";
 
-  var propertyQuotes         = false;
+  //var propertyQuotes         = false;
   var delimiter              = "auto";
 
 
@@ -219,6 +328,9 @@ function convertData(inputTextArea, outputTextArea) {
 
   }; //end test for existence of input text
 } // end convert data
+
+
+
 
 
 /*
@@ -503,45 +615,21 @@ Transform:  downcase   upcase   none
 Indent with:  tabs  spaces
 */
 
+
+
+
+//-----------------------------------------------------------------------------
+
+
+
+/*
 //-----------------------------------------------------------------------------
   // ----- ----- ----- SETTINGS ----- ----- -----
   // ----- SETTINGS -----
-/*
+*/
+
   // Delimiter:   Auto   Comma   Tab
   //
-  var columnDelimiter        = "\t";
-  var rowDelimiter           = "\n";
-
-  
-  // Decimal Sign:   Dot   Comma
-  //
-  
-  
-  // First row is the header (true/false)
-  //
-  var headersProvided        = true;
-  
-
-  // Transform:  downcase   upcase   none
-  //
-  var downcaseHeaders        = true; 
-  var upcaseHeaders          = false; // can't be true if downcase = true
-  
-
-  // Include white space in output (true/false)
-  //
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false; // can't be true if whitespace = true
-
-
-  // Indent with:  tabs  spaces
-  //
-  var newLine                = "\n";
-  var indent                 = "  ";
-  
-  
-  /*if (includeWhiteSpace == true)  {  newLine = "\n";  }
-  else {    indent = "";  newLine = "";  }*/
 
 
   // .............................
@@ -550,13 +638,6 @@ Indent with:  tabs  spaces
 
 
 //-----------------------------------------------------------------------------
-
-
-
-
-//-----------------------------------------------------------------------------
-
-
 
 
 
