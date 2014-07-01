@@ -82,7 +82,44 @@ var inputBooths = document.getElementById('dataInput-booths'); //.value;
 var outputMajors = document.getElementById('dataOutput-majors'); //.value;
 var outputPositions = document.getElementById('dataOutput-positions'); //.value;
 var outputBooths = document.getElementById('dataOutput-booths'); //.value;
+//-----------------------------------------------------------------------------
 
+
+
+
+//-----------------------------------------------------------------------------
+//
+// Data Converter Wrapper functions
+//
+//-----------------------------------------------------------------------------
+
+
+function convertDataMajors() {
+
+  "dataInput-"
+  "dataOutput-"
+  "majors" "positions" "booths"
+
+  
+
+} // end convert majors
+
+
+
+
+function convertDataPositions() {
+
+
+
+} // end convert positions
+
+
+
+function convertDataBooths() {
+
+
+
+} // end convert booths
 
 
 //-----------------------------------------------------------------------------
@@ -96,14 +133,10 @@ var outputBooths = document.getElementById('dataOutput-booths'); //.value;
 //    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
 //    var outputText = "";
 
+// function convertData(inputTextArea, outputTextArea) 
+//function convertData()
 
-
-function convertDataPositions() {
-
-}
-
-
-function convertData() {
+function convertData(inputTextArea, outputTextArea) {
 
   var columnDelimiter        = "\t";
   var rowDelimiter           = "\n";
@@ -144,10 +177,7 @@ function convertData() {
   if (inputText.length > 0) {
 
     if (includeWhiteSpace == true) {  newLine = "\n";  }
-    else {  
-      indent = "";
-      newLine = "";  
-    }
+    else {  indent = "";  newLine = "";  }
 
 
     CSVParser.resetLog();
@@ -158,14 +188,21 @@ function convertData() {
     var headerTypes = parseOutput.headerTypes;
     var errors = parseOutput.errors;
 
+    // var
     var outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine, propertyQuotes);
 
+    //this.outputTextArea.val(errors + this.outputText);    //jquery
+    //this.outputTextArea = document.getElementById('dataOutput');
+    //this.outputTextArea.value = errors + this.outputText;
+
+    //document.getElementById('dataOutput-majors').value = errors + outputText;
     //document.getElementById('dataOutput-positions').value = errors + outputText;
+
     outputTextArea.value = errors + outputText;
 
 
   }; //end test for existence of input text
-} // end convert positions
+} // end convert data
 
 
 

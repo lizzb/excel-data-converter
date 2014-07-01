@@ -147,9 +147,7 @@ Indent with:  tabs  spaces
 
 
 
-
-
-
+//-----------------------------------------------------------------------------
 
 
 
@@ -160,69 +158,6 @@ Indent with:  tabs  spaces
 
 
 
-
-
-
-
-
-//-----------------------------------------------------------------------------
-
-
-
-
-//-----------------------------------------------------------------------------
-
-
-
-
-
-//---------------------------------------
-// PUBLIC METHODS
-//---------------------------------------
-
-//DataConverter.prototype.create = function() {
-//  var self = this;
-
-  //$("#dataInput").keyup(function()  { self.convert(); });
-  //$("#dataInput").change(function() { self.convert(); });
-
-  //$("#dataSelector").bind('change',function(evt){ self.convert(); });
-
-
-
-
-function convertDataMajors() {
-
-    
-    var outputText = "";
-
-  // make sure there is input data before converting...
-  if (inputText.length > 0) {
-
-
-    CSVParser.resetLog();
-    var parseOutput = CSVParser.parse(inputText, headersProvided, delimiter, downcaseHeaders, upcaseHeaders);
-
-    var dataGrid = parseOutput.dataGrid;
-    var headerNames = parseOutput.headerNames;
-    var headerTypes = parseOutput.headerTypes;
-    var errors = parseOutput.errors;
-
-    //var 
-    outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine,propertyQuotes);
-
-    //this.outputTextArea.val(errors + this.outputText);    //jquery
-    //this.outputTextArea = document.getElementById('dataOutput');
-    //this.outputTextArea.value = errors + this.outputText;
-
-    //var outputTextArea = document.getElementById('dataOutput');
-    //var outputTextArea.value = errors + this.outputText;
-
-    document.getElementById('dataOutput-majors').value = errors + outputText;
-
-
-  }; //end test for existence of input text
-} // end convert majors
 
 
 
@@ -313,27 +248,7 @@ function convertData(dataType) {
 //
 //  ******* Actual data conversion happens *******
 //
-/* * 
-    //this.inputText = this.inputTextArea.val();                  //jquery
- //// 
- this.inputText = document.getElementById('dataInput').value;  //javascript only
 
-
-  // http://gomakethings.com/ditching-jquery-for-vanilla-js/
-/*
-  var sandwichTurkey = querySelector('#turkey');
-
-sandwichTurkey.addEventListener('click', function(e) {
-    // Do stuff
-}, false);
-*/
-
-/*var dataInputs = querySelectorAll('.dataInput');
-
-dataInputs.addEventListener('click', function(e) {
-    // Do stuff
-}, false);
-*/
 
 
 
