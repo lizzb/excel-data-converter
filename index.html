@@ -94,6 +94,57 @@ Indent with:  tabs  spaces
 
 //-----------------------------------------------------------------------------
 
+/*
+  function updateSettings (evt) {
+
+    //
+    // WHITESPACE
+    //
+    d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
+    
+    if (d.includeWhiteSpace)
+    {
+      $("input[name=indentType]").removeAttr("disabled");
+      var indentType = $('input[name=indentType]:checked').val();
+      if (indentType === "tabs") {  d.indent = "\t";  } 
+      else if (indentType === "spaces") {  d.indent = "  "  }
+    } 
+    else {  $("input[name=indentType]").attr("disabled", "disabled");  }
+    
+    //
+    // HEADERS
+    //
+    d.headersProvided = $('#headersProvidedCB').attr('checked');
+
+    if (d.headersProvided) {
+      $("input[name=headerModifications]").removeAttr("disabled");
+
+      var hm = $('input[name=headerModifications]:checked').val();
+      if (hm === "downcase") {
+        d.downcaseHeaders = true; d.upcaseHeaders = false;
+      }
+      else if (hm === "upcase") {
+        d.downcaseHeaders = false; d.upcaseHeaders = true;
+      }
+      else if (hm === "none") {
+        d.downcaseHeaders = false; d.upcaseHeaders = false;
+      }
+    }
+    else {  $("input[name=headerModifications]").attr("disabled", "disabled");  }
+    
+
+    //d.delimiter = $('input[name=delimiter]:checked').val();
+    //d.decimal = $('input[name=decimal]:checked').val();
+    
+    //d.useUnderscores = true;
+
+    //d.propertyQuotes = true;
+    
+    d.convert();
+  
+  };
+
+  updateSettings();*/
 
 
 
@@ -592,58 +643,7 @@ $(document).ready(function(){
 
 
 
-  /*
-  function updateSettings (evt) {
-
-    //
-    // WHITESPACE
-    //
-    d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
-    
-    if (d.includeWhiteSpace)
-    {
-      $("input[name=indentType]").removeAttr("disabled");
-      var indentType = $('input[name=indentType]:checked').val();
-      if (indentType === "tabs") {  d.indent = "\t";  } 
-      else if (indentType === "spaces") {  d.indent = "  "  }
-    } 
-    else {  $("input[name=indentType]").attr("disabled", "disabled");  }
-    
-    //
-    // HEADERS
-    //
-    d.headersProvided = $('#headersProvidedCB').attr('checked');
-
-    if (d.headersProvided) {
-      $("input[name=headerModifications]").removeAttr("disabled");
-
-      var hm = $('input[name=headerModifications]:checked').val();
-      if (hm === "downcase") {
-        d.downcaseHeaders = true; d.upcaseHeaders = false;
-      }
-      else if (hm === "upcase") {
-        d.downcaseHeaders = false; d.upcaseHeaders = true;
-      }
-      else if (hm === "none") {
-        d.downcaseHeaders = false; d.upcaseHeaders = false;
-      }
-    }
-    else {  $("input[name=headerModifications]").attr("disabled", "disabled");  }
-    
-
-    //d.delimiter = $('input[name=delimiter]:checked').val();
-    //d.decimal = $('input[name=decimal]:checked').val();
-    
-    //d.useUnderscores = true;
-
-    //d.propertyQuotes = true;
-    
-    d.convert();
   
-  };
-
-  updateSettings();*/
-
 
   
 
@@ -913,13 +913,13 @@ white-space: pre-wrap;
   </p>
 </section>
 -->
-          
- 
 
+
+          
+<!-- Getting Started ================================================== -->     
+<!-- Getting Started ================================================== -->    
 <!-- Getting Started ================================================== -->                 
 <div id="getting-started">
-
-
 
 
 
@@ -991,8 +991,6 @@ white-space: pre-wrap;
       </p>
       <p> <i>For example, "Computer Science (B.S.)" might have a friendlyName of "CompSci (BS)" and a name of "cs".</i> </p>
     </div> <!-- /desc-->
-    
-    
   </div> <!-- /col-md-6 step-desc -->
 
     
@@ -1523,6 +1521,15 @@ booth nameid  name  isactive
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
  <!--div id='base'>
     <div id='header'>
