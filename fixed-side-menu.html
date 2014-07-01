@@ -22,6 +22,11 @@
 
 /*
 
+#companies-converter
+#booths-converter
+#majors-converter
+#positions-converter
+
 .inputHeader
 .outputHeader
 .dataInput .textInputs .highlight
@@ -125,10 +130,17 @@
 
   // previous order: jquery, csvparser, renderer, converter, controller
 
+/*
+SETTINGS
 
+Delimiter:   Auto   Comma   Tab
+Decimal Sign:   Dot   Comma
+ First row is the header
+Transform:  downcase   upcase   none
+ Include white space in output
+Indent with:  tabs  spaces
 
-
-
+*/
 
 
 //-----------------------------------------------------------------------------
@@ -179,7 +191,7 @@ function renderData(dataGrid, headerNames, headerTypes, indent, newLine, propQuo
         {
           outputText += ('"'+headerNames[j] +'"' + ":" + rowOutput );
         }
-        else
+        else // if as.selected
         {
           outputText += (headerNames[j] + ":" + rowOutput)
         }
@@ -319,11 +331,11 @@ DataConverter.prototype.create = function() { //function(w,h) {
   $("#dataInput-majors").change(function() { convertDataMajors(); });
 
 
-  $("#dataInput-positions").keyup(function() { self.convert()});
-  $("#dataInput-positions").change(function() { self.convert(); });
+  $("#dataInput-positions").keyup(function() { convertDataPositions()});
+  $("#dataInput-positions").change(function() { convertDataPositions(); });
 
-  $("#dataInput-booths").keyup(function() { self.convert()});
-  $("#dataInput-booths").change(function() { self.convert(); });
+  $("#dataInput-booths").keyup(function() { convertDataBooths()});
+  $("#dataInput-booths").change(function() { convertDataBooths(); });
 
 
  //});
@@ -451,6 +463,125 @@ this.propertyQuotes
 
   }; //end test for existence of input text
 } // end convert majors
+
+
+// http://stravid.com/en/cleaner-javascript-code-with-enums/
+
+var dataTypes = {
+	MAJORS: 0,
+	POSITIONS: 1,
+	BOOTHS: 2,
+	COMPANIES: 3
+};
+
+
+function convertData(dataType) {
+
+	switch(dataType)
+	{
+		case MAJORS:
+			convertDataMajors();
+			break;
+		case POSITIONS:
+			convertDataPositions();
+			break;
+		case BOOTHS:
+			convertDataBooths();
+			break;
+		case COMPANIES:
+			convertDataCompanies();
+			break;
+		default:
+			break;
+	}
+
+	switch(dataType)
+	{
+		case "MAJORS":
+			convertDataMajors();
+			break;
+		case "POSITIONS":
+			convertDataPositions();
+			break;
+		case "BOOTHS":
+			convertDataBooths();
+			break;
+		case "COMPANIES":
+			convertDataCompanies();
+			break;
+		default:
+			break;
+	}
+
+
+
+
+  var columnDelimiter        = "\t";
+  var rowDelimiter           = "\n";
+
+  var inputTextArea          = {};
+  var outputTextArea         = {};
+
+  var inputHeader            = {};
+  var outputHeader           = {};
+  var dataSelect             = {};
+
+  var newLine                = "\n";
+  var indent                 = "  ";
+
+  var commentLine            = "//";
+  var commentLineEnd         = "";
+ 
+  var headersProvided        = true;
+  var downcaseHeaders        = true; 
+  var upcaseHeaders          = false; // why would this be used..?
+  var includeWhiteSpace      = true;
+  var useTabsForIndent       = false;
+
+
+
+  var propertyQuotes = false;
+  var delimiter = "auto";
+
+    //this.inputText = this.inputTextArea.val();                  //jquery
+    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
+    var outputText = "";
+
+  // make sure there is input data before converting...
+  if (inputText.length > 0) {
+
+    if (includeWhiteSpace == true) {  newLine = "\n";  }
+    else {  
+      indent = "";
+      newLine = "";  
+    }
+
+
+    CSVParser.resetLog();
+    var parseOutput = CSVParser.parse(inputText, headersProvided, delimiter, downcaseHeaders, upcaseHeaders);
+
+    var dataGrid = parseOutput.dataGrid;
+    var headerNames = parseOutput.headerNames;
+    var headerTypes = parseOutput.headerTypes;
+    var errors = parseOutput.errors;
+
+    //this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
+
+
+    //this.outputText = renderData(dataGrid, headerNames, headerTypes, this.indent, this.newLine, this.propertyQuotes);
+
+    //var 
+    outputText = renderData(dataGrid, headerNames, headerTypes, indent, newLine,propertyQuotes);
+
+    document.getElementById('dataOutput-positions').value = errors + outputText;
+
+
+  }; //end test for existence of input text
+} // end convert positions
+
+
+
+
 
 
 
@@ -893,111 +1024,17 @@ $(document).ready(function(){
 
 
 
-<!-- ================================================== -->
-<section>
- <div class="row converter">
-
-
-  <!-- INPUT -->
-  <div class="col-md-6">
-    <div class="inputHeader">
-      <p>Input Header: Majors</p>
-    </div>
-    <textarea id="dataInput-majors" class="dataInput textInputs highlight"></textarea>
-  </div> <!--/col-md-6 -->
-
-
-  <!-- OUTPUT -->
-  <div class="col-md-6">
-    <div class="outputHeader">
-      <p>Output Header: Majors</p>
-    </div>
-    <textarea id="dataOutput-majors" class="dataOutput textInputs highlight"></textarea>
-  </div> <!--/col-md-6 -->
-
-
-  </div> <!--/row -->
-</section>
-<!-- ================================================== -->
 
 
 
 
 
-<!-- ================================================== -->
-<section>
- <div class="row converter">
-
-  <!-- INPUT -->
-  <div class="col-md-6">
-    <div class="inputHeader">
-      <p>Input Header: Company Grid</p>
-    </div>
-    <textarea id="dataInput-companies" class="dataInput textInputs highlight"></textarea>
-  </div> <!--/col-md-6 -->
 
 
-  <!-- OUTPUT -->
-  <div class="col-md-6">
-    <div class="outputHeader">
-      <p>Output Header: Company Grid</p>
-    </div>
-    <textarea id="dataOutput-companies" class="dataOutput textInputs highlight"></textarea>
-  </div> <!--/col-md-6 -->
-
-  </div> <!--/row -->
-</section>
-<!-- ================================================== -->
-
-<!-- ================================================== -->
-<section>
- <div class="row converter">
-
-  <!-- INPUT -->
-  <div class="col-md-6">
-    <div class="inputHeader">
-      <p>Input Header: Positions</p>
-    </div>
-    <textarea id="dataInput-positions" class="dataInput textInputs highlight"></textarea>
-  </div> <!--/col-md-6 -->
 
 
-  <!-- OUTPUT -->
-  <div class="col-md-6">
-    <div class="outputHeader">
-      <p>Output Header: Positions</p>
-    </div>
-    <textarea id="dataOutput-positions" class="dataOutput textInputs highlight"></textarea>
-  </div> <!--/col-md-6 -->
-
-  </div> <!--/row -->
-</section>
-<!-- ================================================== -->
-
-<!-- ================================================== -->
-<section>
- <div class="row converter">
-
-  <!-- INPUT -->
-  <div class="col-md-6">
-    <div class="inputHeader">
-      <p>Input Header: Booths</p>
-    </div>
-    <textarea id="dataInput-booths" class="dataInput textInputs highlight"></textarea>
-  </div> <!--/col-md-6 -->
 
 
-  <!-- OUTPUT -->
-  <div class="col-md-6">
-    <div class="outputHeader">
-      <p>Output Header: Booths</p>
-    </div>
-    <textarea id="dataOutput-booths" class="dataOutput textInputs highlight"></textarea>
-  </div> <!--/col-md-6 -->
-
-  </div> <!--/row -->
-</section>
-<!-- ================================================== -->
 
 
 
@@ -1110,7 +1147,7 @@ $(document).ready(function(){
     
                 
 
-                
+ <!-- MAJORS  ================================================== -->                
                 
                 
  <!-- MAJORS  ================================================== -->
@@ -1168,6 +1205,36 @@ ISP	Integrated Science Program</pre>
 
 </div> <!-- /row --> 
 </section>            
+
+
+
+<!-- ================================================== -->
+<section>
+ <div id="major-converter" class="row converter">
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Majors</p>
+    </div>
+    <textarea id="dataInput-majors" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Majors</p>
+    </div>
+    <textarea id="dataOutput-majors" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->
+
+
               
   
   
@@ -1178,7 +1245,7 @@ ISP	Integrated Science Program</pre>
   <!-- ............................... -->  
 
 <section class="docs-section" id="positions-data">
-<div class="row">
+<div id="major-converter" class="row">
 
   <div class="col-md-6 step-desc">
     <div class="num"> <img src="http://ionicframework.com/img/docs/symbols/step-2@2x.png" width="52" height="52"> </div> <!-- /num-->
@@ -1204,9 +1271,36 @@ intern	Intern</pre>
 
 </div> <!-- /row --> 
 </section>
+
+
+<!-- ================================================== -->
+<section>
+ <div id="positions-converter" class="row converter">
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Positions</p>
+    </div>
+    <textarea id="dataInput-positions" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Positions</p>
+    </div>
+    <textarea id="dataOutput-positions" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->
+
   
 
- <!-- MAJORS  ================================================== -->
+
 
             
 
@@ -1254,7 +1348,32 @@ intern	Intern</pre>
 </div> <!-- /row --> 
 </section>              
                 
-                
+ 
+
+ <!-- ================================================== -->
+<section>
+ <div id="booths-converter" class="row converter">
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Booths</p>
+    </div>
+    <textarea id="dataInput-booths" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Booths</p>
+    </div>
+    <textarea id="dataOutput-booths" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->               
  
           
 
@@ -1288,6 +1407,36 @@ intern	Intern</pre>
       Ionic was built to take HTML5 on mobile into the future. We wanted a mobile framework that not only looked and worked great, but was also powerful enough to build the amazing apps the best developers were creating. HTML5's time has arrived. Ionic is the framework that proves it.
     </p>
   </section>
+
+
+
+<!-- ================================================== -->
+<section>
+ <div id="companies-converter" class="row converter">
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Company Grid</p>
+    </div>
+    <textarea id="dataInput-companies" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Company Grid</p>
+    </div>
+    <textarea id="dataOutput-companies" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->
+
+
+
               
               
                </div>  <!--/getting started-->
@@ -1364,3 +1513,91 @@ intern	Intern</pre>
 
 </body>
 </html>
+
+
+<!--
+function DataConverter(nodeId) {
+  
+  
+/*
+SETTINGS
+
+Delimiter:   Auto   Comma   Tab
+Decimal Sign:   Dot   Comma
+ First row is the header
+Transform:  downcase   upcase   none
+ Include white space in output
+Indent with:  tabs  spaces
+*/
+  
+  
+
+  //---------------------------------------
+  // PUBLIC PROPERTIES
+  //---------------------------------------
+
+  this.nodeId                 = nodeId;
+  this.node                   = $("#"+nodeId);
+
+  /*this.outputDataTypes        = [
+                                {"text":"Properties not in quotes (Actionscript)",       "id":"as",               "notes":""},
+                                {"text":"Properties in quotes (JSON - Properties)",      "id":"json",             "notes":""},
+                                ];*/
+  //this.outputDataType         = "json";
+
+  var columnDelimiter        = "\t";
+  var rowDelimiter           = "\n";
+
+  var inputTextArea          = {};
+  var outputTextArea         = {};
+  
+  this.inputText              = "";
+  this.outputText             = "";
+
+  /*
+  this.inputHeader            = {};
+  this.outputHeader           = {};
+  this.dataSelect             = {};
+  */
+
+
+  var newLine                = "\n";
+  var indent                 = "  ";
+
+  //this.commentLine            = "//";
+  //this.commentLineEnd         = "";
+
+  this.headersProvided        = true;
+  this.downcaseHeaders        = true; 
+  //this.upcaseHeaders          = false; // why would this be used..?
+  this.includeWhiteSpace      = true;
+  this.useTabsForIndent       = false;
+
+
+  // .............................
+  this.propertyQuotes = false;
+  this.propertyQuotes = true;
+  
+  
+  //SETTINGS
+
+  //Delimiter:   Auto   Comma   Tab
+  //Decimal Sign:   Dot   Comma
+  //First row is the header (true/false)
+  //Transform:  downcase   upcase   none
+  //Include white space in output (true/false)
+  //Indent with:  tabs  spaces
+
+  
+  //SETTINGS
+
+  //Delimiter:   Auto   Comma   Tab
+  //Decimal Sign:   Dot   Comma
+  //First row is the header (true/false)
+  //Transform:  downcase   upcase   none
+  //Include white space in output (true/false)
+  //Indent with:  tabs  spaces
+  
+
+}-->
+
