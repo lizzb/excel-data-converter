@@ -1,3 +1,5 @@
+// http://gomakethings.com/ditching-jquery-for-vanilla-js/
+
 // http://stravid.com/en/cleaner-javascript-code-with-enums/
 
 var dataTypes = {
@@ -7,21 +9,6 @@ var dataTypes = {
   COMPANIES: 3
 };
 
-
-
-//
-// Textarea element id's containing data to be converted
-//
-var inputMajors = document.getElementById('dataInput-majors'); //.value;
-var inputPositions = document.getElementById('dataInput-positions'); //.value;
-var inputBooths = document.getElementById('dataInput-booths'); //.value;
-
-//
-// Textarea element id's to insert converted data
-//
-var outputMajors = document.getElementById('dataOutput-majors'); //.value;
-var outputPositions = document.getElementById('dataOutput-positions'); //.value;
-var outputBooths = document.getElementById('dataOutput-booths'); //.value;
 
 
 
@@ -76,26 +63,25 @@ var outputBooths = document.getElementById('dataOutput-booths'); //.value;
 
 
 
+//-----------------------------------------------------------------------------
+//
+// Textarea element IDs
+//
+//-----------------------------------------------------------------------------
 
+//
+// Textarea element id's containing data to be converted
+//
+var inputMajors = document.getElementById('dataInput-majors'); //.value;
+var inputPositions = document.getElementById('dataInput-positions'); //.value;
+var inputBooths = document.getElementById('dataInput-booths'); //.value;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
+// Textarea element id's to insert converted data
+//
+var outputMajors = document.getElementById('dataOutput-majors'); //.value;
+var outputPositions = document.getElementById('dataOutput-positions'); //.value;
+var outputBooths = document.getElementById('dataOutput-booths'); //.value;
 
 
 
@@ -113,6 +99,11 @@ var outputBooths = document.getElementById('dataOutput-booths'); //.value;
 
 
 function convertDataPositions() {
+
+}
+
+
+function convertData() {
 
   var columnDelimiter        = "\t";
   var rowDelimiter           = "\n";
@@ -246,3 +237,17 @@ function renderData(dataGrid, headerNames, headerTypes, indent, newLine, propQuo
     return outputText;
 }
 //-----------------------------------------------------------------------------
+
+
+//---------------------------------------
+// PUBLIC METHODS
+//---------------------------------------
+
+/*DataConverter.prototype.create = function() {
+  var self = this;
+
+  //$("#dataInput").keyup(function()  { self.convert(); });
+  //$("#dataInput").change(function() { self.convert(); });
+
+  //$("#dataSelector").bind('change',function(evt){ self.convert(); });
+*/
