@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>iDay Career Fair Pocket Guide</title>
+
+  <link href="http://ionicframework.com/css/site.css?2" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script src="js/jquery.js" charset="utf-8"></script>
+  <script src="js/CSVParser.js" charset="utf-8"></script>
+
+
+  <script src="js/dataConverter.js"></script>
+
+
+  <script>
+
+
+
+
+/*
+
+function insertSampleData() {
+
+  var sampleData = "booth\tnameId\tname\tisActive\n1\t3m\t3m\t0\n2\talc-luc\t\"Alcatel-Lucent\tblue\"\t1\nJohn\t45\torange\t1\n3\thzf\tHanz zimmerman foundation\t";
+
+  //"NAME\tVALUE\tCOLOR\tDATE\nAlan\t12\tblue\tSep. 25, 2009\nShan\t13\t\"green\tblue\"\tSep. 27, 2009\nJohn\t45\torange\tSep. 29, 2009\nMinna\t27\tteal\tSep. 30, 2009";
+
+  document.getElementById('dataInput').value = sampleData;
+  
+  // this needs to convert automatically, but its not righ tnow...
+  //document.getElementById('converter').convert();
+}
+*/
+
+
+</script>
+
+
+
+
+<style>
+    
+  .data-header {color: red;}
+  .data-header2 {color: blue;}
+  .data-header3 {color: green;}
+  .companyGrid {font-size: 10px;}
+  
+  .propName {color: #008080; }
+
+
+
+.textInputs { 
+  width: 100%;
+  height: 300px;
+
+  background-color: #C9B7C7; /* PURPLISH */
+
+  color: #664D63;
+  font-family: monospace;
+  font-size: 12px;
+}
+.dataInput {color: hotpink;}
+.dataOutput {color: dodgerblue;}
+    
+    
+    
+    
+    textarea {
+  
+  margin-bottom: 0;
+  font-size: 12px !important;
+  
+  color: #008080;
+  
+  border: 0;
+  border-left: 4px solid #D7DBE4;
+  background: #F0F3F8;
+  
+  display: block;
+padding: 10px;
+margin: 0 0 10.5px;
+line-height: 1.42857;
+word-break: break-all;
+word-wrap: break-word;
+/*color: #333333;
+  color: rgb(51, 51, 51);*/
+
+border-radius: 2px;
+
+
+font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+white-space: pre-wrap;
+  
+}
+
+  </style>
+
+
+</head>
+
+<body class="docs docs-page docs-overview">
+
+
+  <div class="header horizontal-gradient">
+    
+    <div class="container">
+      <h3>Career Fair Pocket Guide</h3>
+      <h4>Copy/paste data from Excel into the specified text areas to format the career fair app's data.</h4>
+    </div>
+    
+    <div class="news">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 news-col">
+            Check out the <a href="">tutorial</a> for more detailed instructions.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--/div ...................... ........................................... -->
+
+
+
+
+<div class="container content-container">
+
+  <div class="row">
+
+
+<!-- ===================================================================== -->  
+<!--    SIDE MENU                                                          -->
+<!-- _____________________________________________________________________ -->
+    <div class="col-md-2 col-sm-3 aside-menu">
+      <div class="docked-menu">
+
+        <!-- Docs: Overview -->
+        <ul class="nav left-menu active-menu">
+
+          <!-- active initially places the bar on right side -->
+          <li class="menu-title active"><a href="/docs/overview/">Overview</a></li>
+
+
+          <li><a href="/docs/overview/#step1-install">Install</a></li>
+          <li><a href="/docs/overview/#step2-start">Start</a></li>
+          <li><a href="/docs/overview/#step3-run">Run</a></li>
+
+          <!--
+        <ul class="nav left-menu">
+          <li class="menu-title"><a href="">Guide</a></li>
+        </ul>
+
+        <ul class="nav left-menu">
+          <li class="menu-title"><a href="">CSS</a></li>
+        </ul>
+
+        <ul class="nav left-menu">
+          <li class="menu-title"><a href="">JavaScript</a></li>
+        </ul>
+        --> 
+        
+        </ul>
+
+      </div> <!-- /docked-menu -->
+    </div> <!-- /col-md-2 col-sm-3 aside-menu -->
+<!-- _____________________________________________________________________ -->
+
+    
+
+
+
+<!-- ====================================================================== -->  
+<!--    MAIN CONTENT                                                        -->
+<!-- ______________________________________________________________________ -->    
+    <div class="col-md-10 col-sm-9 main-content">
+                        
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->    
+<section class="docs-section active" id="overview">
+
+  <h1 class="title"><a href="#overview">Overview</a></h1>
+
+  <p>Welcome! Ionic is a powerful HTML5 native app development framework that helps you build native-feeling mobile apps all with web technologies like HTML, CSS, and Javascript.</p>
+  
+    
+    <div class="text-center">
+      <h2>Start building with Ionic!</h2>
+      <p class="sub-heading">
+        Follow these quick steps and start building high quality mobile apps in minutes. For a more indepth overview, watch our <a href="" target="">Crash Course video</a>, which covers everything else you'd want to know.
+      </p>
+    </div>   
+ 
+</section>
+<!-- ______________________________________________________________________ -->
+
+
+
+<!-- What's Included
+  ================================================== 
+<section class="docs-section" id="whats-included">
+
+  <h2 class="title"><a href="#whats-included">What's Included</a></h2>
+  <p>
+    Ionic comes with compiled Javascript and CSS for your app, optional Sass files and JS Framework extensions, along with a great <a href="http://ionicons.com/">icon pack</a>.
+  </p>
+</section>
+-->
+
+
+          
+<!-- Getting Started ================================================== -->     
+<div id="getting-started">
+
+
+
+                         
+                
+                
+ <!-- MAJORS  ================================================== -->
+           
+                  
+<!-- ............................ -->  
+<!-- .......... MAJORS .......... -->
+<!-- ............................ -->  
+
+<section class="docs-section" id="majors-data">
+<div class="row">
+
+  <div class="col-md-6 step-desc">
+    <div class="num"> <img src="http://ionicframework.com/img/docs/symbols/step-1@2x.png" width="52" height="52"> </div> <!-- /num-->
+    <div class="desc">
+      <h3><a href="#majors-data">Majors Data</a></h3>
+      <p>
+          Insert all possible majors that companies will be recruiting. For <strong>each major</strong>, indicate a <code>friendlyName</code> to display in the user interface, and a <code>name</code>, an abbreviated simple text form of the major - i.e. without any special punctuation - to use in the code.
+      </p>
+      <p> <i>For example, "Computer Science (B.S.)" might have a friendlyName of "CompSci (BS)" and a name of "cs".</i> </p>
+    </div> <!-- /desc-->
+  </div> <!-- /col-md-6 step-desc -->
+
+    
+  <div class="col-md-6 code">
+    <div class="highlight">
+<pre><span class="data-header">name friendlyName</span>
+AM  Applied Mathematics
+BME Biomedical Engineering
+CE  Civil Engineering
+ChE Chemical Engineering
+CmpE  Computer Engineering
+CS  Computer Science
+EE  Electrical Engineering
+EnvE  Environmental Engineering
+IE  Industrial Engineering
+MaDE  Manufacturing and Design Engineering
+MatSE Materials Science andEngineering
+MBP Masters of Biotechnology Program
+ME  Mechanical Engineering
+MEM Masters of Engineering Management
+MMM MMM
+MPDD  MPDD
+MPM Masters of Product Management
+MSEDI Masters of Science Engineering Design and Innovation
+MSIT  Masters of Science Information Technology Program
+TAM Theoretical and Applied Math
+UND Undeclared
+MSiA  MSiA
+ECS ECS
+Econ  Economics
+ISP Integrated Science Program</pre>
+    </div> <!-- /highlight -->   
+  </div> <!-- /col-md-6 code -->
+
+</div> <!-- /row --> 
+</section>            
+
+
+
+<!-- ================================================== -->
+<section>
+ <div id="major-converter" class="row converter">
+
+  <!-- INPUT -->
+  <div class="col-md-6">
+    <div class="inputHeader">
+      <p>Input Header: Majors</p>
+    </div>
+    <textarea id="dataInput-majors" class="dataInput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  <!-- OUTPUT -->
+  <div class="col-md-6">
+    <div class="outputHeader">
+      <p>Output Header: Majors</p>
+    </div>
+    <textarea id="dataOutput-majors" class="dataOutput textInputs highlight"></textarea>
+  </div> <!--/col-md-6 -->
+
+
+  </div> <!--/row -->
+</section>
+<!-- ================================================== -->
+
+<!-- ================================================== -->
+
+  
+  <!-- .......... STEP 1 .......... -->
+  
+  <section class="docs-section" id="step1-install">
+    
+    
+  <div class="row" id="first-step">
+    
+    <div class="col-md-6 step-desc">
+      
+      <div class="num">
+        <img src="http://ionicframework.com/img/docs/symbols/step-1@2x.png" width="52" height="52">
+      </div> <!-- /num-->
+      
+      <div class="desc">
+        <!--h2 class="title"><a href="#step1-install">Install Ionic</a></h2-->
+        <h3><a href="#step1-install">Install Ionic</a></h3>
+        <p>
+          First, install Node.js. Then, install the latest Cordova and Ionic command-line tools. Follow the Android and iOS platform guides to install required platform dependencies. Windows users might want to watch this installation video.
+        </p>
+        <p> <i>Note: iOS development requires Mac OS X.</i> </p>
+      </div> <!-- /desc-->
+      
+    </div> <!-- /col-md-6 step-desc -->
+                
+                
+    <div class="col-md-6 code">
+      <div class="highlight">
+        <pre><code class="bash"><span class="nv">$ </span>npm install -g cordova ionic</code></pre>
+      </div> <!-- /highlight -->
+    </div> <!-- /col-md-6 code -->
+  </div> <!-- /row first-step -->
+  
+  </section>
+    
+    
+    <!-- .......... STEP 2 .......... -->
+
+    <section class="docs-section" id="step2-start">   
+    
+
+  <div class="row">
+    <div class="col-md-6 step-desc">
+      <div class="num">
+        <img src="http://ionicframework.com/img/docs/symbols/step-2@2x.png" width="52" height="52">
+      </div>
+      <div class="desc">
+        <h3><a href="#step2-start">Start a project</a></h3>
+        <p>
+          Create an Ionic project using one of our ready-made app templates, or a blank one to start
+          fresh.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 code">
+      <div class="highlight"><pre><code class="bash">  <span class="nv">$ </span>ionic start myApp tabs
+        
+      </code></pre></div>
+    </div>
+  </div>
+  <div class="row" id="template-images">
+    
+  </div>
+  
+    </section>
+  
+
+  <!-- .......... STEP 3 .......... -->
+  
+    <section class="docs-section" id="step3-run">
+  <div class="row">
+    
+    <div class="col-md-6 step-desc">
+      
+      <div class="num">
+        <img src="http://ionicframework.com/img/docs/symbols/step-3@2x.png" width="52" height="52">
+      </div>
+      <div class="desc">
+        <h3><a href="#step3-run">Run it</a></h3>
+        <p>
+          Ionic apps are based on Cordova, so we can use the Cordova utilities to build, test, and deploy our apps, but we
+          provide simple ways to do the same with the ionic utility (substitute ios for android to build for Android):
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 code">
+      <div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>myApp
+        <span class="nv">$ </span>ionic platform add ios
+        <span class="nv">$ </span>ionic build ios
+        <span class="nv">$ </span>ionic emulate ios
+      </code></pre></div>
+    </div>
+  </div>
+  
+<!--   </div>  /getting started-->
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>  <!--/getting started-->
+<!-- ______________________________________________________________________ -->    
+
+
+</div> <!-- /col-md-10 col-sm-9 main-content -->
+</div> <!-- /row -->
+
+</div> <!-- /container content-container -->
+ 
+
+
+
+
+
+
+<!-- ===================================================================== -->  
+<!--    PRE-FOOTER                                                         -->
+<!-- _____________________________________________________________________ -->
+<div class="pre-footer">
+  <div class="row ionic">
+    <div class="col-sm-6 col-a">
+      <h4>
+        <a href="/docs/guide/">Read the Book <span class="icon ion-arrow-right-c"></span></a>
+      </h4>
+      <p>
+        A walk through of getting Ionic installed, creating a new project, building the UI, adding logic, testing, deploying on the device, and publishing to various app stores.
+      </p>
+    </div> <!-- /col-sm-6 col-a -->
+
+    <div class="col-sm-6 col-b">
+      <h4>
+        <a href="">Community Forum <span class="icon ion-arrow-right-c"></span></a>
+      </h4>
+      <p>
+        Discuss and share ideas, hacks, and quesitons with others building with Ionic on the official Ionic Forum. Stop by and say Hello!
+      </p>
+      
+    </div> <!-- /col-sm-6 col-b -->
+  </div> <!-- /row ionic -->
+</div> <!-- /pre-footer -->
+<!-- ===================================================================== -->
+
+
+
+<!-- ===================================================================== -->  
+<!--    FOOTER                                                             -->
+<!-- _____________________________________________________________________ -->
+<footer class="footer">
+
+  <p class="authors">
+    Created by <a href="">@maxlynch</a>,
+    <a href="">@adamdbradley</a>, and
+    <a href="">@benjsperry</a>. Code licensed under
+    <a href="">MIT</a>. Docs under <a href="">Apache 2</a>.
+  </p>
+  <nav class="base-links">
+    <a href="/docs/">Docs</a>
+    &#183; <a href="/blog/">Blog</a>
+    &#183; <a href="">Present Ionic</a>
+    &#183; <a href="">Forum</a>
+    &#183; <a href="">Contribute</a>
+    &#183; <a href="">Ionicons</a>
+    &#183; <a href="">Github</a>
+    &#183; <a href="">Issues</a>
+    &#183; <a href="">Jobs</a>
+  </nav>
+  
+</footer>
+<!-- ===================================================================== -->
+
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+<script src="http://ionicframework.com/js/site.js"></script>
+
+
+</body>
+</html>
