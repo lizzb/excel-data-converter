@@ -1,13 +1,14 @@
 
-
-
-
-
-
-
 //-----------------------------------------------------------------------------
 // Controller
 //-----------------------------------------------------------------------------
+
+
+/*
+DataConverter.prototype.insertSampleData = function() {
+  this.inputTextArea.val("NAME\tVALUE\tCOLOR\nAlan\t12\tblue\nShan\t13\t\"green\tblue\"\nJohn\t45\torange\nMinna\t27\tteal");
+}
+*/
 
 
 //-----------------------------------------------------------------------------
@@ -19,9 +20,7 @@ $(document).ready(function(){
 
 
 //-----------------------------------------------------------------------------
-//
 // Textarea element IDs
-//
 //-----------------------------------------------------------------------------
 
 //
@@ -40,20 +39,21 @@ var outputBooths = document.getElementById('dataOutput-booths'); //.value;
 //-----------------------------------------------------------------------------
 
 
+//inputTextArea.val("booth\troom\tfloor\nAlan\t12\tblue\nShan\t13\t\"green\tblue\"\nJohn\t45\torange\nMinna\t27\tteal");
+
+var sample = "booth\tfloor\troom\n2\t1\tHeritage\n9\t1\tHeritage\n7\t1\tHeritage\n11\t1\tHeritage\n12\t1\tHeritage\n15\t1\tHeritage\n20\t1\tHeritage\n23\t1\tHeritage\n24\t1\tHeritage\n26\t1\tHeritage";
+
+inputBooths.value = sample;
+
+inputPositions.value = "name\tfriendlyName\ncoop\tCo-op\nFT\tFTE\nintern\tIntern";
 
 //-----------------------------------------------------------------------------
-//
 // Data Converter Wrapper functions
 // last param = prop quotes on or off
-//
 //-----------------------------------------------------------------------------
 function convertDataMajors() { convertData(inputMajors, outputMajors, false)};
 function convertDataPositions() { convertData(inputPositions, outputPositions, false)};
 function convertDataBooths() { convertData(inputBooths, outputBooths, true)};
-
-
-
-
 
 
   $("#dataInput-majors").keyup(function()   { convertDataMajors(); });
@@ -65,8 +65,6 @@ function convertDataBooths() { convertData(inputBooths, outputBooths, true)};
   $("#dataInput-booths").keyup(function()   { convertDataBooths(); });
   $("#dataInput-booths").change(function()  { convertDataBooths(); });
 
-  //d.convert(); // want this to go instantly... grr.......TODO
-
 
   // hacky, temporary
   // http://gomakethings.com/ditching-jquery-for-vanilla-js/
@@ -74,8 +72,16 @@ function convertDataBooths() { convertData(inputBooths, outputBooths, true)};
 
   
 }) // DOCUMENT READY
+
 //-----------------------------------------------------------------------------
 
+
+
+//-----------------------------------------------------------------------------
+//
+// Data Conversion Settings
+//
+//-----------------------------------------------------------------------------
 
 // http://gomakethings.com/ditching-jquery-for-vanilla-js/
 
@@ -88,12 +94,34 @@ var dataTypes = {
   COMPANIES: 3
 };
 
+//jquery
+//this.inputText = this.inputTextArea.val();                  
+//var inputText = document.getElementById('dataInput-majors').value;
+//vanilla js
+
+//this.inputText = this.inputTextArea.val();                  //jquery
+//    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
+//    var outputText = "";
+
+// function convertData(inputTextArea, outputTextArea) 
+//function convertData()
+
+/*
+           Delimiter:
+
+             <input class="settingsElement" type="radio" name="delimiter" id='delimiterAuto'   value="auto" checked/> Auto</label>
+             <input class="settingsElement" type="radio" name="delimiter" id='delimiterComma'  value="comma" /> Comma</label>
+             <input class="settingsElement" type="radio" name="delimiter" id='delimiterTab'    value="tab" /> Tab</label>
+*/
 
 //-----------------------------------------------------------------------------
 //
-// Data Conversion Settings
+// Data Converter
 //
 //-----------------------------------------------------------------------------
+
+function convertData(inputTextArea, outputTextArea, propertyQuotes) {
+
 
   // Delimiter:   Auto   Comma   Tab
   //
@@ -105,6 +133,7 @@ var dataTypes = {
   
   // Decimal Sign:   Dot   Comma
   //
+  var decimal               = "dot";
   
   
   // First row is the header (true/false)
@@ -120,8 +149,9 @@ var dataTypes = {
 
   // Include white space in output (true/false)
   //
-  var includeWhiteSpace      = true;
-  var useTabsForIndent       = false; // can't be true if whitespace = true
+  var includeWhiteSpace      = false; //true;
+  var useTabsForIndent       = false; // can't be true if whitespace = true ??
+  //  var useTabsForIndent       = false; // can't be true if whitespace = true ??
 
 
   // Indent with:  tabs  spaces
@@ -133,156 +163,41 @@ var dataTypes = {
   //  else {    indent = "";  newLine = "";   }
 
 
-
-  //var inputHeader            = {};
-  //var outputHeader           = {};
-  //var dataSelect             = {};
-
+  // --- Fed in through parameters - element ids of textarea tags
   //var inputTextArea          = {};
   //var outputTextArea         = {};
 
+  // --- local variables now
   //var inputText              = "";
   //var outputText             = "";
 
-  //var commentLine            = "//";
-  //var commentLineEnd         = "";
-
-
-  // .............................
-  //
-  var propertyQuotes         = false; // as; = true is json
-
-
-  
-
-  
-
-//jquery
-//this.inputText = this.inputTextArea.val();                  
-//var inputText = document.getElementById('dataInput-majors').value;
-//vanilla js
-
-
-
-
-
-
-/*//-----------------------------------------------------------------------------
-//
-// Textarea element IDs
-//
-//-----------------------------------------------------------------------------
-
-//
-// Textarea element id's containing data to be converted
-//
-var inputMajors = document.getElementById('dataInput-majors'); //.value;
-var inputPositions = document.getElementById('dataInput-positions'); //.value;
-var inputBooths = document.getElementById('dataInput-booths'); //.value;
-
-//
-// Textarea element id's to insert converted data
-//
-var outputMajors = document.getElementById('dataOutput-majors'); //.value;
-var outputPositions = document.getElementById('dataOutput-positions'); //.value;
-var outputBooths = document.getElementById('dataOutput-booths'); //.value;
-//-----------------------------------------------------------------------------
-
-
-
-
-//-----------------------------------------------------------------------------
-//
-// Data Converter Wrapper functions
-// last param = prop quotes on or off
-//
-//-----------------------------------------------------------------------------
-function convertDataMajors() { convertData(inputMajors, outputMajors, false);
-function convertDataPositions() { convertData(inputPositions, outputPositions, false);
-function convertDataBooths() { convertData(inputBooths, outputBooths, true);
-*/
-/*
-function convertDataMajors() {
-
-  //"dataInput-"
-  //"dataOutput-"
-  //"majors" "positions" "booths"
-
-  // textarea input element and output element ids
-  var inputTextArea          = document.getElementById('dataInput-majors');
-  var outputTextArea         = document.getElementById('dataOutput-majors');
-  convertData(inputTextArea, outputTextArea);
-  
-} // end convert majors
-
-
-
-function convertDataPositions() {
-
-  // textarea input element and output element ids
-  var inputTextArea          = document.getElementById('dataInput-positions');
-  var outputTextArea         = document.getElementById('dataOutput-positions');
-  convertData(inputTextArea, outputTextArea);
-
-} // end convert positions
-
-
-
-function convertDataBooths() {
-
-  // textarea input element and output element ids
-  var inputTextArea          = document.getElementById('dataInput-booths');
-  var outputTextArea         = document.getElementById('dataOutput-booths');
-  convertData(inputTextArea, outputTextArea);
-
-} // end convert booths
-*/
-
-//-----------------------------------------------------------------------------
-//
-// Data Converter
-//
-//-----------------------------------------------------------------------------
-
-
-//this.inputText = this.inputTextArea.val();                  //jquery
-//    var inputText = document.getElementById('dataInput-positions').value;  //vanilla js
-//    var outputText = "";
-
-// function convertData(inputTextArea, outputTextArea) 
-//function convertData()
-
-function convertData(inputTextArea, outputTextArea, propertyQuotes) {
-
-  var columnDelimiter        = "\t";
-  var rowDelimiter           = "\n";
-
-  // Fed in through parameters - element ids of textarea tags
-  //var inputTextArea          = {};
-  //var outputTextArea         = {};
-
-  // Hardcoded in HTML now
+  // --- Hardcoded in HTML now
   //var inputHeader            = {};
   //var outputHeader           = {};
   //var dataSelect             = {}; // removed
 
-  // not used?? ....
+  // --- not used?? ....
   //var commentLine            = "//";
   //var commentLineEnd         = "";
  
+
   var headersProvided        = true;
 
   var downcaseHeaders        = true;  // ......
   var upcaseHeaders          = false; // ......
 
-  var includeWhiteSpace      = true;  // -----
-  var useTabsForIndent       = false; // -----
+  var includeWhiteSpace      = true; //true;  // -----
+  var useTabsForIndent       = false; //false; // -----
 
   var newLine                = "\n";
   var indent                 = "  ";
 
+
+  // fed into parameter
   //var propertyQuotes         = false;
-  var delimiter              = "auto";
+  // .............................
+  //
+  //var propertyQuotes         = false; // as; = true is json
 
 
 
@@ -481,26 +396,7 @@ function renderData(dataGrid, headerNames, headerTypes, indent, newLine, propQuo
   $("#dataInput-booths").change(function()  { convertDataBooths(); });
 */
 
-  //var sidebar = $('#header');
-
-  //var widthOffset = 345;
-  //var heightOffset = 35
-
-  //var win = $(window);
-  //var w = win.width() - widthOffset;
-  //var h = win.height() - heightOffset;
-
-  //var d = new DataConverter('converter');
-  //d.create(); //(w,h);
-  //d.convert(); // want this to go instantly... grr.......TODO
-
-  //$(".settingsElement").change(updateSettings);
-
-
-
-  
-
-  
+ 
 
   // hacky, temporary
   // http://gomakethings.com/ditching-jquery-for-vanilla-js/
@@ -640,5 +536,42 @@ Indent with:  tabs  spaces
 //-----------------------------------------------------------------------------
 
 
+
+/*
+function convertDataMajors() {
+
+  //"dataInput-"
+  //"dataOutput-"
+  //"majors" "positions" "booths"
+
+  // textarea input element and output element ids
+  var inputTextArea          = document.getElementById('dataInput-majors');
+  var outputTextArea         = document.getElementById('dataOutput-majors');
+  convertData(inputTextArea, outputTextArea);
+  
+} // end convert majors
+
+
+
+function convertDataPositions() {
+
+  // textarea input element and output element ids
+  var inputTextArea          = document.getElementById('dataInput-positions');
+  var outputTextArea         = document.getElementById('dataOutput-positions');
+  convertData(inputTextArea, outputTextArea);
+
+} // end convert positions
+
+
+
+function convertDataBooths() {
+
+  // textarea input element and output element ids
+  var inputTextArea          = document.getElementById('dataInput-booths');
+  var outputTextArea         = document.getElementById('dataOutput-booths');
+  convertData(inputTextArea, outputTextArea);
+
+} // end convert booths
+*/
 
 //-----------------------------------------------------------------------------
