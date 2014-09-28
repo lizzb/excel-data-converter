@@ -804,26 +804,17 @@ booth nameid  name  isactive
 
         <form id='settingsForm'>
 
-
-           <p>
-           Delimiter:
-
-             <label><input class="settingsElement" type="radio" name="delimiter" id='delimiterAuto'   value="auto" checked/> Auto</label>
-             <label><input class="settingsElement" type="radio" name="delimiter" id='delimiterComma'  value="comma" /> Comma</label>
-             <label><input class="settingsElement" type="radio" name="delimiter" id='delimiterTab'    value="tab" /> Tab</label>
-            </p>
-
-
-          <p>
           Decimal Sign:
 
-             <label><input class="settingsElement" type="radio" name="decimal" id='decimalDot'   value="dot" checked/> Dot</label>
-             <label><input class="settingsElement" type="radio" name="decimal" id='decimalComma'  value="comma" /> Comma</label>
-          </p>
+             <input class="settingsElement" type="radio" name="decimal" id='decimalDot'   value="dot" checked/> Dot
+             <input class="settingsElement" type="radio" name="decimal" id='decimalComma'  value="comma" /> Comma
 
-          <p>
+
+
           <label><input class="settingsElement" type="checkbox" name="" value="" id="headersProvidedCB" checked /> First row is the header</label>
-          </p>
+
+
+
 
 
           <div class="settingsGroup">
@@ -845,40 +836,34 @@ booth nameid  name  isactive
         </form>
 
 
-        <label>
+
         <input class="settingsElement" type="radio" name="delimiter" id='delimiterAuto'   value="auto" checked/> 
         Delimiter: Auto
-        </label>
-        <br>
 
-        <label>
+
+
         <input class="settingsElement" type="radio" name="decimal" id='decimalDot'   value="dot" checked/>
         Decimal: Dot
-        </label>
-        <br>
 
-         <label>
+
          <input class="settingsElement" type="checkbox" name="" value="" id="headersProvidedCB" checked />
          First row is the header
-         </label>
-         <br>
 
-         <label>
+
+
          <input class="settingsElement" type="radio" name="headerModifications" id='headersNoTransform' value="none" checked />
          Transform header: none
-         </label>
-         <br>
 
-          <label>
+
+
           <input class="settingsElement" type="checkbox" name="some_name" value="" id="includeWhiteSpaceCB" checked />
           Include white space in output
-          </label>
-          <br>
 
-          <label>
+
+
           <input class="settingsElement" type="radio" name="indentType" value="spaces" id='includeWhiteSpaceSpaces' checked/>
           Include white space as: spaces
-          </label>
+
 
 
       </div>
