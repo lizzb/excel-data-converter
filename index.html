@@ -13,11 +13,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--meta name="description" content="ionic documentation overview website"-->
 
-  <title>iDay Career Fair Pocket Guide</title>
+  <title>Data Converter for iDay Career Fair Pocket Guide</title>
 
   <!--link href="http://ionicframework.com/css/site.css?2" rel="stylesheet"-->
-  <link href="css/ionicframework-site.css" rel="stylesheet">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link href="style/ionicframework-site.css" rel="stylesheet">
+  <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script-->
+  <!-- kinda weird to put jquery in a style folder but CLEARLY i'm not caring about how ugly this source code is atm -->
+  <script src="style/jquery.min.js"></script>
 
   <!--link rel="stylesheet" href="css/converter.css" type="text/css" media="screen" title="no title" charset="utf-8"-->
 
@@ -32,6 +34,7 @@
 
   <script src="js/dataConverter.js"></script>
 
+<link href="style/iday-data-converter.css" rel="stylesheet">
 
   <script>
 
@@ -56,7 +59,7 @@ function insertSampleData() {
 
 </script>
 
-<link href="css/iday-data-converter.css" rel="stylesheet">
+
 
 
 
@@ -103,7 +106,7 @@ function insertSampleData() {
         <ul class="nav left-menu active-menu">
 
           <!-- active initially places the bar on right side -->
-          <li class="menu-title active"><a href="/docs/overview/">Overview</a></li>
+          <li class="menu-title active"><a href="/docs/overview/#overview">Overview</a></li>
 
           <!--
           <li><a href="/docs/overview/#step1-install">Install</a></li>
@@ -150,15 +153,17 @@ function insertSampleData() {
 
   <h1 class="title"><a href="#overview">Overview</a></h1>
 
-  <p>Welcome! Ionic is a powerful HTML5 native app development framework that helps you build native-feeling mobile apps all with web technologies like HTML, CSS, and Javascript.</p>
+    <p>Welcome! Later I'll change this paragraph to contain information specific to the project it relates to, rather than the content from the website whose styling inspired me.</p>
+
+  <!--p>Welcome! Ionic is a powerful HTML5 native app development framework that helps you build native-feeling mobile apps all with web technologies like HTML, CSS, and Javascript.</p-->
   
     
-    <div class="text-center">
+    <!--div class="text-center">
       <h2>Start building with Ionic!</h2>
       <p class="sub-heading">
         Follow these quick steps and start building high quality mobile apps in minutes. For a more indepth overview, watch our <a href="" target="">Crash Course video</a>, which covers everything else you'd want to know.
       </p>
-    </div>   
+    </div-->   
  
 </section>
 <!-- ______________________________________________________________________ -->
@@ -605,17 +610,11 @@ intern  Intern</pre>
 </div> <!-- /row -->
 
 </div> <!-- /container content-container -->
- 
-
-
-
-
-
 
 <!-- ===================================================================== -->  
 <!--    PRE-FOOTER                                                         -->
 <!-- _____________________________________________________________________ -->
-<div class="pre-footer">
+<!--div class="pre-footer">
   <div class="row ionic">
     <div class="col-sm-6 col-a">
       <h4>
@@ -624,7 +623,7 @@ intern  Intern</pre>
       <p>
         A walk through of getting Ionic installed, creating a new project, building the UI, adding logic, testing, deploying on the device, and publishing to various app stores.
       </p>
-    </div> <!-- /col-sm-6 col-a -->
+    </div> <!-- /col-sm-6 col-a ->
 
     <div class="col-sm-6 col-b">
       <h4>
@@ -633,13 +632,11 @@ intern  Intern</pre>
       <p>
         Discuss and share ideas, hacks, and quesitons with others building with Ionic on the official Ionic Forum. Stop by and say Hello!
       </p>
-      
-    </div> <!-- /col-sm-6 col-b -->
-  </div> <!-- /row ionic -->
+
+    </div> <!-- /col-sm-6 col-b ->
+  </div> <!-- /row ionic ->
 </div> <!-- /pre-footer -->
 <!-- ===================================================================== -->
-
-
 
 <!-- ===================================================================== -->  
 <!--    FOOTER                                                             -->
@@ -652,25 +649,18 @@ intern  Intern</pre>
     <a href="">@benjsperry</a>. Code licensed under
     <a href="">MIT</a>. Docs under <a href="">Apache 2</a>.
   </p>
-  <nav class="base-links">
-    <a href="/docs/">Docs</a>
-    &#183; <a href="/blog/">Blog</a>
-    &#183; <a href="">Present Ionic</a>
-    &#183; <a href="">Forum</a>
-    &#183; <a href="">Contribute</a>
-    &#183; <a href="">Ionicons</a>
-    &#183; <a href="">Github</a>
-    &#183; <a href="">Issues</a>
-    &#183; <a href="">Jobs</a>
-  </nav>
   
+
 </footer>
 <!-- ===================================================================== -->
 
 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<!--script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 
-<script src="http://ionicframework.com/js/site.js"></script>
+<script src="http://ionicframework.com/js/site.js"></script-->
+
+<script src="style/bootstrap.min.js"></script>
+<script src="style/ionicframework-site.js"></script>
 
 
 <!--p>
@@ -791,3 +781,14 @@ booth nameid  name  isactive
 
       </div>
     </div-->
+    <!--
+Created using JS Bin
+http://jsbin.com
+
+  section #positions-data .docs-section div .row
+  section #positions-converter div .row .converter
+
+Copyright (c) 2014 by lizzb (http://jsbin.com/mixer/14/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
